@@ -207,10 +207,76 @@ Additional Classes:
         <!-- END: Latest News -->
 
         <div class="nk-gap-2"></div>
-        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top</span> Players</span></h3>
-        <div class="nk-gap"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top</span> Parceiros</span></h3>
         <div class="row">
-            <div class="col-lg-8"></div>
+            <div class="col-lg-8">
+                <!-- START: Features -->
+                {% for parceiro in top_ten.entries %}
+                    {% if forloop.counter < 5 %}
+                        <h3 class="nk-decorated">{{ parceiro.username }}</h3>
+                        <h4 class="nk-decorated-h">Geral</h4>
+                        <div class="nk-gap"></div>
+                        <div class="row vertical-gap">
+                            <div class="col-lg-4">
+                                <div class="nk-feature-2">
+                                    <div class="nk-feature-icon">
+                                        <div class="nk-count h2 mb-0">{{ parceiro.kills }}</div>
+                                    </div>
+                                    <div class="nk-feature-cont text-center">
+                                        <h3 class="nk-feature-title">Kills</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="nk-feature-2">
+                                    <div class="nk-feature-icon">
+                                        <div class="nk-count h2 mb-0">{{ parceiro.wins }}</div>
+                                    </div>
+                                    <div class="nk-feature-cont text-center">
+                                        <h3 class="nk-feature-title">Vitórias</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="nk-feature-2">
+                                    <div class="nk-feature-icon">
+                                        <div class="nk-count h2 mb-0">{{ parceiro.matches }}</div>
+                                    </div>
+                                    <div class="nk-feature-cont text-center">
+                                        <h3 class="nk-feature-title">Partidas</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="nk-feature-1">
+                                    <div class="nk-feature-cont">
+                                        <h3 class="nk-feature-title"><a>{{ parceiro.score }}</a></h3>
+                                        <h3 class="nk-feature-title text-main-1"><a>Score</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="nk-feature-1">
+                                    <div class="nk-feature-cont">
+                                        <h3 class="nk-feature-title"><a>{{ parceiro.kd }}</a></h3>
+                                        <h3 class="nk-feature-title text-main-1"><a>KD</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="nk-feature-1">
+                                    <div class="nk-feature-cont">
+                                        <h3 class="nk-feature-title"><a>{{ parceiro.rank }}</a></h3>
+                                        <h3 class="nk-feature-title text-main-1"><a>rank</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nk-gap-2"></div>
+                        <!-- END: Features -->
+                    {% endif %}
+                {% endfor %}
+            </div>
             <div class="col-lg-4">
                 <!--
                     START: Sidebar
@@ -222,6 +288,7 @@ Additional Classes:
                 -->
                 <div class="nk-gap"></div>
                 <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                    <div class="nk-gap-3"></div>
                     <div class="nk-widget nk-widget-highlighted">
                         <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recente</span></h4>
                         <div class="nk-widget-content">
