@@ -5,58 +5,38 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <title>Investir != XP</title>
-
     <meta name="description" content="Investir não dá XP - API de Jogos">
     <meta name="keywords" content="game, gaming, api, rest, fortnite">
-
     <link rel="icon" type="image/png" href="{% static 'core/assets/images/favicon.png' %}">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- START: Styles -->
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7cOpen+Sans:400,700" rel="stylesheet" type="text/css">
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href={% static "core/assets/vendor/bootstrap/dist/css/bootstrap.min.css" %}>
-
     <!-- FontAwesome -->
     <script defer src={% static "core/assets/vendor/fontawesome-free/js/all.js" %}></script>
     <script defer src={% static "core/assets/vendor/fontawesome-free/js/v4-shims.js" %}></script>
-
     <!-- IonIcons -->
     <link rel="stylesheet" href={% static "core/assets/vendor/ionicons/css/ionicons.min.css" %}>
-
     <!-- Flickity -->
     <link rel="stylesheet" href={% static "core/assets/vendor/flickity/dist/flickity.min.css" %}>
-
     <!-- Photoswipe -->
     <link rel="stylesheet" type="text/css" href={% static "core/assets/vendor/photoswipe/dist/photoswipe.css" %}>
     <link rel="stylesheet" type="text/css" href={% static "core/assets/vendor/photoswipe/dist/default-skin/default-skin.css" %}>
-
     <!-- Seiyria Bootstrap Slider -->
     <link rel="stylesheet" href={% static "core/assets/vendor/bootstrap-slider/dist/css/bootstrap-slider.min.css" %}>
-
     <!-- Summernote -->
     <link rel="stylesheet" type="text/css" href={% static "core/assets/vendor/summernote/dist/summernote-bs4.css" %}>
-
     <!-- GoodGames -->
     <link rel="stylesheet" href="{% static "core/assets/css/goodgames.css" %}">
-
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{% static "core/assets/css/custom.css" %}">
-
     <!-- END: Styles -->
-
     <!-- jQuery -->
     <script src={% static "core/assets/vendor/jquery/dist/jquery.min.js" %}></script>
-
-
 </head>
-
 
 <!--
     Additional Classes:
@@ -64,17 +44,11 @@
 -->
 <body>
 
-
-
-
-
 <!--
     Additional Classes:
         .nk-header-opaque
 -->
-    <header class="nk-header nk-header-opaque">
-
-
+<header class="nk-header nk-header-opaque">
 
     <!-- START: Top Contacts -->
     <div class="nk-contacts-top">
@@ -86,20 +60,16 @@
             </div>
             <div class="nk-contacts-right">
                 <ul class="nk-contacts-icons">
-
                     <li>
                         <a href="#" data-toggle="modal" data-target="#modalSearch">
                             <span class="fa fa-search"></span>
                         </a>
                     </li>
-
-
                     <li>
                         <a href="#" data-toggle="modal" data-target="#modalLogin">
                             <span class="fa fa-user"></span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -107,53 +77,47 @@
     <!-- END: Top Contacts -->
 
 
+    <!--
+        START: Navbar
 
-        <!--
-            START: Navbar
-
-            Additional Classes:
-                .nk-navbar-sticky
-                .nk-navbar-transparent
-                .nk-navbar-autohide
-        -->
-        <nav class="nk-navbar nk-navbar-top nk-navbar-sticky nk-navbar-autohide">
-            <div class="container">
-                <div class="nk-nav-table">
-                    <h3>Investir Não Dá XP</h3>
-
-                    <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
-                        <li>
-                            <a href="{% url 'core:index' %}">Home</a>
-                        </li>
-                    </ul>
-                    <ul class="nk-nav nk-nav-right nk-nav-icons">
-                        <li class="single-icon d-lg-none">
-                            <a href="#" class="no-link-effect" data-nav-toggle="#nk-nav-mobile">
-                                <span class="nk-icon-burger">
-                                    <span class="nk-t-1"></span>
-                                    <span class="nk-t-2"></span>
-                                    <span class="nk-t-3"></span>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        Additional Classes:
+            .nk-navbar-sticky
+            .nk-navbar-transparent
+            .nk-navbar-autohide
+    -->
+    <nav class="nk-navbar nk-navbar-top nk-navbar-sticky nk-navbar-autohide">
+        <div class="container">
+            <div class="nk-nav-table">
+                <h3>Investir Não Dá XP</h3>
+                <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
+                    <li>
+                        <a href="{% url 'core:index' %}">Home</a>
+                    </li>
+                </ul>
+                <ul class="nk-nav nk-nav-right nk-nav-icons">
+                    <li class="single-icon d-lg-none">
+                        <a href="#" class="no-link-effect" data-nav-toggle="#nk-nav-mobile">
+                            <span class="nk-icon-burger">
+                                <span class="nk-t-1"></span>
+                                <span class="nk-t-2"></span>
+                                <span class="nk-t-3"></span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <!-- END: Navbar -->
+        </div>
+    </nav>
+    <!-- END: Navbar -->
+</header>
+<!--
+START: Navbar Mobile
 
-    </header>
-
-
-
-        <!--
-    START: Navbar Mobile
-
-    Additional Classes:
-        .nk-navbar-left-side
-        .nk-navbar-right-side
-        .nk-navbar-lg
-        .nk-navbar-overlay-content
+Additional Classes:
+.nk-navbar-left-side
+.nk-navbar-right-side
+.nk-navbar-lg
+.nk-navbar-overlay-content
 -->
 <div id="nk-nav-mobile" class="nk-navbar nk-navbar-side nk-navbar-right-side nk-navbar-overlay-content d-lg-none">
     <div class="nano">
@@ -171,314 +135,319 @@
 </div>
 <!-- END: Navbar Mobile -->
 
-
-
-    <div class="nk-main">
-        <div class="nk-gap-2"></div>
-    <div class="container">
-
-    <div class="nk-blog-post nk-blog-post-border-bottom border-bottom-0 pb-0">
-        <a class="nk-post-img">
-            <img src="{% static 'core/assets/img/image-1600.jpg' %}" alt="Fortnite banner">
-        </a>
-    </div>
-
-    <!-- START: Latest News -->
+<div class="nk-main">
     <div class="nk-gap-2"></div>
-    <h3 class="nk-decorated-h-2"><span><span class="text-main-1">{{ resposta.rows }} Novo{{ resposta.rows|pluralize }}</span> Ite{{ resposta.rows|pluralize:"m,ns" }}</span></h3>
-    <div class="nk-gap"></div>
+    <div class="container">
+        <div class="nk-blog-post nk-blog-post-border-bottom border-bottom-0 pb-0">
+            <a class="nk-post-img">
+                <img src="{% static 'core/assets/img/image-1600.jpg' %}" alt="Fortnite banner">
+            </a>
+        </div>
+        <!-- START: Latest News -->
+        <div class="nk-gap-2"></div>
+        <h3 class="nk-decorated-h-2">
+            <span>
+                <span class="text-main-1">{{ resposta.rows }} Novo{{ resposta.rows|pluralize }}</span> Ite{{ resposta.rows|pluralize:"m,ns" }}
+            </span>
+        </h3>
+        <div class="nk-gap"></div>
 
-    <div class="nk-news-box">
-        <div class="nk-news-box-list">
-            <div class="nano">
-                <div class="nano-content">
-                    {% for item in resposta.items %}
-                        <div class="nk-news-box-item">
-                            <div class="nk-news-box-item-img">
-                                <img src="{{ item.item.images.background }}" alt="{{ item.name }}">
-                            </div>
-                            {% if item.item.images.featured.transparent %}
-                                <img src="{{ item.item.images.featured.transparent }}" alt="{{ item.name }}" class="nk-news-box-item-full-img">
-                            {% else %}
-                                <img src="{{ item.item.images.background }}" alt="{{ item.name }}" class="nk-news-box-item-full-img">
-                            {% endif %}
-                            <h3 class="nk-news-box-item-title">{{ item.name }}</h3>
-
-                            <span class="nk-news-box-item-categories">
+        <div class="nk-news-box">
+            <div class="nk-news-box-list">
+                <div class="nano">
+                    <div class="nano-content">
+                        {% for item in resposta.items %}
+                            <div class="nk-news-box-item">
+                                <div class="nk-news-box-item-img">
+                                    <img src="{{ item.item.images.background }}" alt="{{ item.name }}">
+                                </div>
+                                {% if item.item.images.featured.transparent %}
+                                    <img src="{{ item.item.images.featured.transparent }}" alt="{{ item.name }}"
+                                         class="nk-news-box-item-full-img">
+                                {% else %}
+                                    <img src="{{ item.item.images.background }}" alt="{{ item.name }}"
+                                         class="nk-news-box-item-full-img">
+                                {% endif %}
+                                <h3 class="nk-news-box-item-title">{{ item.name }}</h3>
+                                <span class="nk-news-box-item-categories">
                                 <span class="bg-main-5">{{ item.item.type }}</span>
                             </span>
-
-                            <div class="nk-news-box-item-text">
-                                <p>Raridade: {{ item.item.rarity }}</p>
+                                <div class="nk-news-box-item-text">
+                                    <p>Raridade: {{ item.item.rarity }}</p>
+                                </div>
+                                <div class="nk-news-box-item-date"><span class="fa fa-calendar"></span> {{ resposta.date }}</div>
                             </div>
-                            <div class="nk-news-box-item-date"><span class="fa fa-calendar"></span> {{ resposta.date }}</div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="nk-news-box-each-info">
-            <div class="nano">
-                <div class="nano-content">
-                    <!-- There will be inserted info about selected news-->
-                    <div class="nk-news-box-item-image">
-                        <img src="{% static "core/assets/img/supply-drop.webp" %}" alt="" style="max-height: 350px; width:auto">
-                        <span class="nk-news-box-item-categories">
+            <div class="nk-news-box-each-info">
+                <div class="nano">
+                    <div class="nano-content">
+                        <!-- There will be inserted info about selected news-->
+                        <div class="nk-news-box-item-image">
+                            <img src="{% static "core/assets/img/supply-drop.webp" %}" alt=""
+                                 style="max-height: 350px; width:auto">
+                            <span class="nk-news-box-item-categories">
                             <span class="bg-main-4">{{ item.item.type }}</span>
                         </span>
-                    </div>
-                    <h3 class="nk-news-box-item-title">Veja a lista de novos itens</h3>
-                    <div class="nk-news-box-item-text">
-                        <p>Clique nos itens ao lado para mais detalhes. Fique por dentro de todas novidades.</p>
-                    </div>
-                    <div class="nk-news-box-item-date">
-                        <span class="fa fa-calendar"></span> Sep 18, 2018
+                        </div>
+                        <h3 class="nk-news-box-item-title">Veja a lista de novos itens</h3>
+                        <div class="nk-news-box-item-text">
+                            <p>Clique nos itens ao lado para mais detalhes. Fique por dentro de todas novidades.</p>
+                        </div>
+                        <div class="nk-news-box-item-date">
+                            <span class="fa fa-calendar"></span> Sep 18, 2018
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- END: Latest News -->
+        <!-- END: Latest News -->
 
-<div class="nk-gap-2"></div>
-<h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top</span> Players</span></h3>
-<div class="nk-gap"></div>
-<div class="row">
-    <div class="col-lg-8"></div>
-    <div class="col-lg-4">
-            <!--
-                START: Sidebar
-
-                Additional Classes:
-                    .nk-sidebar-left
-                    .nk-sidebar-right
-                    .nk-sidebar-sticky
-            -->
+        <div class="nk-gap-2"></div>
+        <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Top</span> Players</span></h3>
         <div class="nk-gap"></div>
-        <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
-            <div class="nk-widget nk-widget-highlighted">
-                <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recente</span></h4>
-                <div class="nk-widget-content">
-                    {% for top in top_ten.entries %}
-                        {% if forloop.counter < 4 %}
-                            <div class="nk-widget">
-                                <h3 class="nk-post-title">
-                                    <a href="#">{{ top.username }}</a>
-                                </h3>
-                                <p>
-                                    <strong>Kills:</strong> {{ top.kills }} <br>
-                                    <strong>Vitórias:</strong> {{ top.wins }} <br>
-                                    <strong>Partidas:</strong> {{ top.matches }} <br>
-                                    <strong>KD:</strong> {{ top.kd }} <br>
-                                    <strong>Plataforma:</strong> {{ top.platform }} <br>
-                                </p>
-                                <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 18, 2018</div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </aside>
-            <!-- END: Sidebar -->
-        </div>
-    </div>
-</div>
+        <div class="row">
+            <div class="col-lg-8"></div>
+            <div class="col-lg-4">
+                <!--
+                    START: Sidebar
 
-</div>
-    <div class="nk-gap-4"></div>
-        <!-- START: Footer -->
-        <footer class="nk-footer">
-            <div class="container">
-                <div class="nk-gap-3"></div>
-                <div class="row vertical-gap">
-                    <div class="col-md-6">
-                        <div class="nk-widget">
-                            <h4 class="nk-widget-title"><span class="text-main-1">Fale</span> Conosco</h4>
-                            <div class="nk-widget-content">
-                                <form class="nk-form nk-form-ajax">
-                                    {% csrf_token %}
-                                    <div class="row vertical-gap sm-gap">
-                                        <div class="col-md-6">
-                                            <input type="email" class="form-control required" name="email" placeholder="Email *">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control required" name="nome" placeholder="Nome *">
+                    Additional Classes:
+                        .nk-sidebar-left
+                        .nk-sidebar-right
+                        .nk-sidebar-sticky
+                -->
+                <div class="nk-gap"></div>
+                <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
+                    <div class="nk-widget nk-widget-highlighted">
+                        <h4 class="nk-widget-title"><span><span class="text-main-1">Top 3</span> Recente</span></h4>
+                        <div class="nk-widget-content">
+                            {% for top in top_ten.entries %}
+                                {% if forloop.counter < 4 %}
+                                    <div class="nk-widget">
+                                        <h3 class="nk-post-title">
+                                            <a href="#">{{ top.username }}</a>
+                                        </h3>
+                                        <p>
+                                            <strong>Kills:</strong> {{ top.kills }} <br>
+                                            <strong>Vitórias:</strong> {{ top.wins }} <br>
+                                            <strong>Partidas:</strong> {{ top.matches }} <br>
+                                            <strong>KD:</strong> {{ top.kd }} <br>
+                                            <strong>Plataforma:</strong> {{ top.platform }} <br>
+                                        </p>
+                                        <div class="nk-post-date"><span class="fa fa-calendar"></span> Sep 18, 2018
                                         </div>
                                     </div>
-                                    <div class="nk-gap"></div>
-                                    <textarea class="form-control required" name="mensagem" rows="5" placeholder="Mensagem *"></textarea>
-                                    <div class="nk-gap-1"></div>
-                                    <button class="nk-btn nk-btn-rounded nk-btn-color-white">
-                                        <span>Enviar</span>
-                                        <span class="icon"><i class="ion-paper-airplane"></i></span>
-                                    </button>
-                                    <div class="nk-form-response-success"></div>
-                                    <div class="nk-form-response-error"></div>
-                                </form>
-                            </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="nk-gap-3"></div>
-            </div>
-
-            <div class="nk-copyright">
-                <div class="container">
-                    <div class="nk-copyright-right">
-                        <ul class="nk-social-links-2">
-                            <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- END: Footer -->
-    </div>
-
-    <!-- START: Page Background -->
-        <img class="nk-page-background-top" src="{% static "core/assets/images/bg-top.png" %}" alt="">
-        <img class="nk-page-background-bottom" src="{% static "core/assets/images/bg-bottom.png" %}" alt="">
-    <!-- END: Page Background -->
-
-    <!-- START: Search Modal -->
-    <div class="nk-modal modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="ion-android-close"></span>
-                    </button>
-
-                    <h4 class="mb-0">Pesquisar</h4>
-
-                    <div class="nk-gap-1"></div>
-                    <form action="#" class="nk-form nk-form-style-1">
-                        <input type="text" value="" name="search" class="form-control" placeholder="Digite aqui a sua pesquisa" autofocus>
-                    </form>
-                </div>
+                </aside>
+                <!-- END: Sidebar -->
             </div>
         </div>
     </div>
-    <!-- END: Search Modal -->
-
-    <!-- START: Login Modal -->
-    <div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="ion-android-close"></span>
-                    </button>
-
-                    <h4 class="mb-0"><span class="text-main-1">Log</span> In</h4>
-
-                    <div class="nk-gap-1"></div>
-                    <form action="#" class="nk-form text-white">
-                        <div class="row vertical-gap">
-                            <div class="col-md-6">
-                                Use email e senha:
-
-                                <div class="nk-gap"></div>
-                                <input type="email" value="" name="email" class=" form-control" placeholder="Email">
-
-                                <div class="nk-gap"></div>
-                                <input type="password" value="" name="password" class="required form-control" placeholder="Senha">
-                            </div>
-                            <div class="col-md-6">
-                                Ou redes sociais:
-
-                                <div class="nk-gap"></div>
-
-                                <ul class="nk-social-links-2">
-                                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="nk-gap-1"></div>
-                        <div class="row vertical-gap">
-                            <div class="col-md-6">
-                                <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">Entrar</a>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mnt-5">
-                                    <small><a href="#">Esqueceu sua senha?</a></small>
+</div>
+<div class="nk-gap-4"></div>
+<!-- START: Footer -->
+<footer class="nk-footer">
+    <div class="container">
+        <div class="nk-gap-3"></div>
+        <div class="row vertical-gap">
+            <div class="col-md-6">
+                <div class="nk-widget">
+                    <h4 class="nk-widget-title"><span class="text-main-1">Fale</span> Conosco</h4>
+                    <div class="nk-widget-content">
+                        <form class="nk-form nk-form-ajax">
+                            {% csrf_token %}
+                            <div class="row vertical-gap sm-gap">
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control required" name="email"
+                                           placeholder="Email *">
                                 </div>
-                                <div class="mnt-5">
-                                    <small><a href="#">Não é membro? Cadastre-se</a></small>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control required" name="nome" placeholder="Nome *">
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="nk-gap"></div>
+                            <textarea class="form-control required" name="mensagem" rows="5"
+                                      placeholder="Mensagem *"></textarea>
+                            <div class="nk-gap-1"></div>
+                            <button class="nk-btn nk-btn-rounded nk-btn-color-white">
+                                <span>Enviar</span>
+                                <span class="icon"><i class="ion-paper-airplane"></i></span>
+                            </button>
+                            <div class="nk-form-response-success"></div>
+                            <div class="nk-form-response-error"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="nk-gap-3"></div>
     </div>
-    <!-- END: Login Modal -->
 
-    <!-- START: Scripts -->
+    <div class="nk-copyright">
+        <div class="container">
+            <div class="nk-copyright-right">
+                <ul class="nk-social-links-2">
+                    <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- END: Footer -->
 
-    <!-- Object Fit Polyfill -->
-    <script src={% static "core/assets/vendor/object-fit-images/dist/ofi.min.js" %}></script>
+<!-- START: Page Background -->
+<img class="nk-page-background-top" src="{% static "core/assets/images/bg-top.png" %}" alt="">
+<img class="nk-page-background-bottom" src="{% static "core/assets/images/bg-bottom.png" %}" alt="">
+<!-- END: Page Background -->
 
-    <!-- GSAP -->
-    <script src={% static "core/assets/vendor/gsap/src/minified/TweenMax.min.js" %}></script>
-    <script src={% static "core/assets/vendor/gsap/src/minified/plugins/ScrollToPlugin.min.js" %}></script>
+<!-- START: Search Modal -->
+<div class="nk-modal modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
 
-    <!-- Popper -->
-    <script src={% static "core/assets/vendor/popper.js/dist/umd/popper.min.js" %}></script>
+                <h4 class="mb-0">Pesquisar</h4>
 
-    <!-- Bootstrap -->
-    <script src={% static "core/assets/vendor/bootstrap/dist/js/bootstrap.min.js" %}></script>
+                <div class="nk-gap-1"></div>
+                <form action="#" class="nk-form nk-form-style-1">
+                    <input type="text" value="" name="search" class="form-control"
+                           placeholder="Digite aqui a sua pesquisa" autofocus>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Search Modal -->
 
-    <!-- Sticky Kit -->
-    <script src={% static "core/assets/vendor/sticky-kit/dist/sticky-kit.min.js" %}></script>
+<!-- START: Login Modal -->
+<div class="nk-modal modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="ion-android-close"></span>
+                </button>
 
-    <!-- Jarallax -->
-    <script src={% static "core/assets/vendor/jarallax/dist/jarallax.min.js" %}></script>
-    <script src={% static "core/assets/vendor/jarallax/dist/jarallax-video.min.js" %}></script>
+                <h4 class="mb-0"><span class="text-main-1">Log</span> In</h4>
 
-    <!-- imagesLoaded -->
-    <script src={% static "core/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js" %}></script>
+                <div class="nk-gap-1"></div>
+                <form action="#" class="nk-form text-white">
+                    <div class="row vertical-gap">
+                        <div class="col-md-6">
+                            Use email e senha:
 
-    <!-- Flickity -->
-    <script src={% static "core/assets/vendor/flickity/dist/flickity.pkgd.min.js" %}></script>
+                            <div class="nk-gap"></div>
+                            <input type="email" value="" name="email" class=" form-control" placeholder="Email">
 
-    <!-- Photoswipe -->
-    <script src={% static "core/assets/vendor/photoswipe/dist/photoswipe.min.js" %}></script>
-    <script src={% static "core/assets/vendor/photoswipe/dist/photoswipe-ui-default.min.js" %}></script>
+                            <div class="nk-gap"></div>
+                            <input type="password" value="" name="password" class="required form-control"
+                                   placeholder="Senha">
+                        </div>
+                        <div class="col-md-6">
+                            Ou redes sociais:
 
-    <!-- Jquery Validation -->
-    <script src={% static "core/assets/vendor/jquery-validation/dist/jquery.validate.min.js" %}></script>
+                            <div class="nk-gap"></div>
 
-    <!-- Jquery Countdown + Moment -->
-    <script src={% static "core/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js" %}></script>
-    <script src={% static "core/assets/vendor/moment/min/moment.min.js" %}></script>
-    <script src={% static "core/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js" %}></script>
+                            <ul class="nk-social-links-2">
+                                <li><a class="nk-social-facebook" href="#"><span class="fab fa-facebook"></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <!-- Hammer.js -->
-    <script src={% static "core/assets/vendor/hammerjs/hammer.min.js" %}></script>
+                    <div class="nk-gap-1"></div>
+                    <div class="row vertical-gap">
+                        <div class="col-md-6">
+                            <a href="#" class="nk-btn nk-btn-rounded nk-btn-color-white nk-btn-block">Entrar</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mnt-5">
+                                <small><a href="#">Esqueceu sua senha?</a></small>
+                            </div>
+                            <div class="mnt-5">
+                                <small><a href="#">Não é membro? Cadastre-se</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END: Login Modal -->
 
-    <!-- NanoSroller -->
-    <script src={% static "core/assets/vendor/nanoscroller/bin/javascripts/jquery.nanoscroller.js" %}></script>
+<!-- START: Scripts -->
 
-    <!-- SoundManager2 -->
-    <script src={% static "core/assets/vendor/soundmanager2/script/soundmanager2-nodebug-jsmin.js" %}></script>
+<!-- Object Fit Polyfill -->
+<script src={% static "core/assets/vendor/object-fit-images/dist/ofi.min.js" %}></script>
 
-    <!-- Seiyria Bootstrap Slider -->
-    <script src={% static "core/assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js" %}></script>
+<!-- GSAP -->
+<script src={% static "core/assets/vendor/gsap/src/minified/TweenMax.min.js" %}></script>
+<script src={% static "core/assets/vendor/gsap/src/minified/plugins/ScrollToPlugin.min.js" %}></script>
 
-    <!-- Summernote -->
-    <script src={% static "core/assets/vendor/summernote/dist/summernote-bs4.min.js" %}></script>
+<!-- Popper -->
+<script src={% static "core/assets/vendor/popper.js/dist/umd/popper.min.js" %}></script>
 
-    <!-- nK Share -->
-    <script src={% static "core/assets/plugins/nk-share/nk-share.js" %}></script>
+<!-- Bootstrap -->
+<script src={% static "core/assets/vendor/bootstrap/dist/js/bootstrap.min.js" %}></script>
 
-    <!-- GoodGames -->
-    <script src={% static "core/assets/js/goodgames.min.js" %}></script>
-    <script src={% static "core/assets/js/goodgames-init.js" %}></script>
-    <!-- END: Scripts -->
+<!-- Sticky Kit -->
+<script src={% static "core/assets/vendor/sticky-kit/dist/sticky-kit.min.js" %}></script>
+
+<!-- Jarallax -->
+<script src={% static "core/assets/vendor/jarallax/dist/jarallax.min.js" %}></script>
+<script src={% static "core/assets/vendor/jarallax/dist/jarallax-video.min.js" %}></script>
+
+<!-- imagesLoaded -->
+<script src={% static "core/assets/vendor/imagesloaded/imagesloaded.pkgd.min.js" %}></script>
+
+<!-- Flickity -->
+<script src={% static "core/assets/vendor/flickity/dist/flickity.pkgd.min.js" %}></script>
+
+<!-- Photoswipe -->
+<script src={% static "core/assets/vendor/photoswipe/dist/photoswipe.min.js" %}></script>
+<script src={% static "core/assets/vendor/photoswipe/dist/photoswipe-ui-default.min.js" %}></script>
+
+<!-- Jquery Validation -->
+<script src={% static "core/assets/vendor/jquery-validation/dist/jquery.validate.min.js" %}></script>
+
+<!-- Jquery Countdown + Moment -->
+<script src={% static "core/assets/vendor/jquery-countdown/dist/jquery.countdown.min.js" %}></script>
+<script src={% static "core/assets/vendor/moment/min/moment.min.js" %}></script>
+<script src={% static "core/assets/vendor/moment-timezone/builds/moment-timezone-with-data.min.js" %}></script>
+
+<!-- Hammer.js -->
+<script src={% static "core/assets/vendor/hammerjs/hammer.min.js" %}></script>
+
+<!-- NanoSroller -->
+<script src={% static "core/assets/vendor/nanoscroller/bin/javascripts/jquery.nanoscroller.js" %}></script>
+
+<!-- SoundManager2 -->
+<script src={% static "core/assets/vendor/soundmanager2/script/soundmanager2-nodebug-jsmin.js" %}></script>
+
+<!-- Seiyria Bootstrap Slider -->
+<script src={% static "core/assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js" %}></script>
+
+<!-- Summernote -->
+<script src={% static "core/assets/vendor/summernote/dist/summernote-bs4.min.js" %}></script>
+
+<!-- nK Share -->
+<script src={% static "core/assets/plugins/nk-share/nk-share.js" %}></script>
+
+<!-- GoodGames -->
+<script src={% static "core/assets/js/goodgames.min.js" %}></script>
+<script src={% static "core/assets/js/goodgames-init.js" %}></script>
+<!-- END: Scripts -->
 
 </body>
 </html>
