@@ -16,7 +16,7 @@ class Player(models.Model):
 
 class PlayerStats(models.Model):
     player = models.ForeignKey(
-        'core.Player', related_name='statuses', on_delete=models.CASCADE,
+        'players.Player', related_name='statuses', on_delete=models.CASCADE,
     )
     data = JSONField(null=True, blank=True)
 
