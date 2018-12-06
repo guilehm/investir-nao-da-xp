@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Player, PlayerStats
+from players.models import Player, PlayerStats
 
 
 @admin.register(Player)
