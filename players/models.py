@@ -31,7 +31,6 @@ class Player(models.Model):
         self.save()
 
 
-
 class PlayerStats(models.Model):
     player = models.ForeignKey(
         'players.Player', related_name='statuses', on_delete=models.CASCADE,
