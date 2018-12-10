@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import dj_database_url
 import os
+
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -127,4 +128,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+FORTNITE_AUTH_KEY = os.getenv('FORTNITE_AUTH_KEY')
 FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')
