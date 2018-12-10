@@ -8,6 +8,7 @@ class Player(models.Model):
     uid = models.CharField(max_length=100, unique=True, db_index=True, null=True, blank=True)
     username = models.CharField(max_length=50, unique=True)
     platforms = models.CharField(max_length=100, null=True, blank=True)
+    seasons = models.CharField(max_length=100, null=True, blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -15,7 +16,7 @@ class Player(models.Model):
     def __str__(self):
         return f'{self.username}'
 
-    def get_user_id(self):
+    def get_user_data(self):
         url = 'https://fortnite-public-api.theapinetwork.com/prod09/users/id'
         data = {'username': self.username}
         communication = Communication.objects.create(
@@ -23,7 +24,12 @@ class Player(models.Model):
             method='get_user_id',
             url=url,
         )
-        communication.communicate(**data)
+        response = communication.communicate(**data)
+        self.uid = response['uid']
+        self.platforms = response['platforms']
+        self.seasons = response['seasons']
+        self.save()
+
 
 
 class PlayerStats(models.Model):
