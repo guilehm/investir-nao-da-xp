@@ -10,6 +10,9 @@ name = "pypi"
 isort = "*"
 django = "*"
 "psycopg2-binary" = "*"
+requests = "*"
+django-extensions = "*"
+ipython = "*"
 
 [requires]
 python_version = "3.6"
