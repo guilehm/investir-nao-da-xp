@@ -1,5 +1,7 @@
-from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.db import models
+
+from communications.models import Communication
 
 
 class Player(models.Model):
@@ -12,6 +14,16 @@ class Player(models.Model):
 
     def __str__(self):
         return f'{self.username}'
+
+    def get_user_id(self):
+        url = 'https://fortnite-public-api.theapinetwork.com/prod09/users/id'
+        data = {'username': self.username}
+        communication = Communication.objects.create(
+            player=self,
+            method='get_user_id',
+            url=url,
+        )
+        communication.communicate(**data)
 
 
 class PlayerStats(models.Model):
