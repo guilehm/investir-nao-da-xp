@@ -128,8 +128,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-FORTNITE_AUTH_KEY = os.getenv('FORTNITE_AUTH_KEY')
-FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')
+TRN_API_KEY = os.getenv('TRN_API_KEY')
 
 
 if os.getcwd() == '/app':
