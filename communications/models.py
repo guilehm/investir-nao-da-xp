@@ -4,23 +4,29 @@ import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
-from xp.settings import FORTNITE_AUTH_KEY
+from core.models import Platform
+from players.models import Player, PlayerStats
+from xp.settings import TRN_API_KEY
 
-HEADERS = {'Authorization': FORTNITE_AUTH_KEY}
+HEADERS = {'TRN-Api-Key': TRN_API_KEY}
+URLS = {
+    'profile_data': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
+}
 
 
 class Communication(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    player = models.ForeignKey(
-        'players.Player',
-        related_name='communications',
+    method = models.CharField(max_length=100)
+    url = models.URLField(max_length=200, null=True)
+    data = JSONField(null=True, blank=True)
+    player_stats = models.OneToOneField(
+        'players.PlayerStats',
+        related_name='communication',
+        on_delete=models.CASCADE,
         null=True,
         blank=True,
-        on_delete=models.CASCADE,
     )
-    method = models.CharField(max_length=100)
-    url = models.URLField(max_length=200)
-    data = JSONField(null=True, blank=True)
+    error = models.BooleanField(default=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -29,9 +35,48 @@ class Communication(models.Model):
         return f'Communication #{self.id}'
 
     def communicate(self, **data):
-        response = requests.post(
-            url=self.url, headers=HEADERS, data=dict(data)
+        url = URLS.get(self.method)
+        response = requests.get(
+            url=url.format(**data),
+            headers=HEADERS,
+            data=dict(data),
         )
         self.data = response.json()
-        self.save()
-        return self.data
+        self.url = url
+        if response.ok and not self.data.get('error'):
+            self.error = False
+            self.save()
+            return self.data
+
+    def _get_platform(self):
+        if not self.error:
+            platform, created = Platform.objects.get_or_create(
+                name=self.data.get('platformName')
+            )
+            if created:
+                platform.epic_id = self.data.get('platformId')
+                platform.name_long = self.data.get('platformNameLong')
+                platform.save()
+            return platform
+
+    def _get_player(self):
+        if not self.data.get('error'):
+            player, _ = Player.objects.get_or_create(
+                uid=self.data.get('accountId'),
+                username=self.data.get('epicUserHandle'),
+            )
+            return player
+
+    def create_player_stats(self):
+        if not self.error:
+            player = self._get_player()
+            platform = self._get_platform()
+            player.platforms.add(platform)
+            player_stats = PlayerStats.objects.create(
+                player=player,
+                platform=platform,
+                data=self.data,
+            )
+            self.player_stats = player_stats
+            player_stats.save()
+            self.save()
