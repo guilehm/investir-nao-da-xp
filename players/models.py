@@ -2,13 +2,14 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from communications.models import Communication
+from core.models import Platform, Season
 
 
 class Player(models.Model):
     uid = models.CharField(max_length=100, unique=True, db_index=True, null=True, blank=True)
     username = models.CharField(max_length=50, unique=True)
-    platforms = models.CharField(max_length=100, null=True, blank=True)
-    seasons = models.CharField(max_length=100, null=True, blank=True)
+    platforms = models.ManyToManyField('core.Platform', related_name='players', blank=True)
+    seasons = models.ManyToManyField('core.Season', related_name='players', blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -25,11 +26,39 @@ class Player(models.Model):
             url=url,
         )
         response = communication.communicate(**data)
-        self.uid = response['uid']
-        self.platforms = response['platforms']
-        self.seasons = response['seasons']
+        self.uid = response.get('uid')
         self.save()
+
+        platforms_data = response.get('platforms')
+        platforms = [Platform.objects.get_or_create(name=name) for name in platforms_data]
+        self.platforms.add(*[platform[0] for platform in platforms])
+
+        seasons_data = response.get('seasons')
+        seasons = [Season.objects.get_or_create(name=name) for name in seasons_data]
+        self.seasons.add(*[season[0] for season in seasons])
+
         return response
+
+    def get_stats(self, platform_name='pc'):
+        if not self.uid:
+            return self.get_user_data()
+        url = 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats'
+        data = {
+            'user_id': self.uid,
+            'platform': self.platforms.get(name=platform_name).name,
+            'window': 'alltime',
+        }
+        communication = Communication.objects.create(
+            player=self,
+            method='get_stats',
+            url=url,
+        )
+        response = communication.communicate(**data)
+        stats = PlayerStats.objects.create(
+            player=self,
+            data=response,
+        )
+        return stats.data
 
 
 class PlayerStats(models.Model):
