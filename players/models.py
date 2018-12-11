@@ -1,8 +1,7 @@
+import uuid
+
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-
-from communications.models import Communication
-from core.models import Platform, Season
 
 
 class Player(models.Model):
@@ -17,55 +16,21 @@ class Player(models.Model):
     def __str__(self):
         return f'{self.username}'
 
-    def get_user_data(self):
-        url = 'https://fortnite-public-api.theapinetwork.com/prod09/users/id'
-        data = {'username': self.username}
-        communication = Communication.objects.create(
-            player=self,
-            method='get_user_id',
-            url=url,
-        )
-        response = communication.communicate(**data)
-        self.uid = response.get('uid')
-        self.save()
-
-        platforms_data = response.get('platforms')
-        platforms = [Platform.objects.get_or_create(name=name) for name in platforms_data]
-        self.platforms.add(*[platform[0] for platform in platforms])
-
-        seasons_data = response.get('seasons')
-        seasons = [Season.objects.get_or_create(name=name) for name in seasons_data]
-        self.seasons.add(*[season[0] for season in seasons])
-
-        return response
-
-    def get_stats(self, platform_name='pc'):
-        if not self.uid:
-            return self.get_user_data()
-        url = 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats'
-        data = {
-            'user_id': self.uid,
-            'platform': self.platforms.get(name=platform_name).name,
-            'window': 'alltime',
-        }
-        communication = Communication.objects.create(
-            player=self,
-            method='get_stats',
-            url=url,
-        )
-        response = communication.communicate(**data)
-        stats = PlayerStats.objects.create(
-            player=self,
-            data=response,
-        )
-        return stats.data
-
 
 class PlayerStats(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     player = models.ForeignKey(
         'players.Player', related_name='statuses', on_delete=models.CASCADE,
     )
+    platform = models.ForeignKey(
+        'core.Platform', related_name='statuses', on_delete=models.CASCADE, blank=True,
+    )
     data = JSONField(null=True, blank=True)
+    stats_solo = JSONField(null=True, blank=True)
+    stats_duo = JSONField(null=True, blank=True)
+    stats_squad = JSONField(null=True, blank=True)
+    stats_lifetime = JSONField(null=True, blank=True)
+    recent_matches = JSONField(null=True, blank=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -75,3 +40,17 @@ class PlayerStats(models.Model):
 
     class Meta:
         verbose_name_plural = 'player statuses'
+
+    def save(self, *args, **kwargs):
+        if not self.data.get('error'):
+            if not self.stats_solo:
+                self.stats_solo = self.data['stats']['p2']
+            if not self.stats_duo:
+                self.stats_duo = self.data['stats']['p10']
+            if not self.stats_squad:
+                self.stats_squad = self.data['stats']['p9']
+            if not self.stats_lifetime:
+                self.stats_lifetime = self.data['lifeTimeStats']
+            if not self.recent_matches:
+                self.recent_matches = self.data['recentMatches']
+        return super().save(*args, **kwargs)
