@@ -29,6 +29,7 @@ class Player(models.Model):
         self.platforms = response['platforms']
         self.seasons = response['seasons']
         self.save()
+        return response
 
 
 class PlayerStats(models.Model):
