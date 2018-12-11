@@ -34,5 +34,4 @@ class Communication(models.Model):
         )
         self.data = response.json()
         self.save()
-        if response.status_code == 200:
-            return self.data
+        return self.data
