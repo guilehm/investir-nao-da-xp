@@ -130,3 +130,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 FORTNITE_AUTH_KEY = os.getenv('FORTNITE_AUTH_KEY')
 FORTNITE_API_KEY = os.getenv('FORTNITE_API_KEY')
+
+
+if os.getcwd() == '/app':
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    ALLOWED_HOSTS = ['investir-xp.herokuapp.com']
+
+    DEBUG = False
+
+    # Config for staticfiles
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = 'staticfiles'
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )

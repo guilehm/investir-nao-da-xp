@@ -16,6 +16,9 @@ ipython = "*"
 dj-database-url = "*"
 "psycopg2" = "*"
 jupyter = "*"
+dj-static = "*"
+"static3" = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
