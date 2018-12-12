@@ -49,11 +49,11 @@ class PlayerStats(models.Model):
     def save(self, *args, **kwargs):
         if not self.data.get('error'):
             if not self.stats_solo:
-                self.stats_solo = self.data['stats']['p2']
+                self.stats_solo = self.data['stats'].get('p2')
             if not self.stats_duo:
-                self.stats_duo = self.data['stats']['p10']
+                self.stats_duo = self.data['stats'].get('p10')
             if not self.stats_squad:
-                self.stats_squad = self.data['stats']['p9']
+                self.stats_squad = self.data['stats'].get('p9')
             if not self.stats_lifetime:
                 self.stats_lifetime = self.data['lifeTimeStats']
             if not self.recent_matches:
