@@ -15,3 +15,4 @@ class PlayerStatsAdmin(admin.ModelAdmin):
     list_display = ('id', 'player', 'date_added')
     list_filter = ('player', 'date_added')
     search_fields = ('player__username', 'data')
+    readonly_fields = ('date_added', 'date_changed')
