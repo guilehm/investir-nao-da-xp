@@ -1,13 +1,17 @@
 {% extends 'core/base.html' %}
+{% block main_title %}
+    {{ player.username }}
+{% endblock %}
+{% block search_form %}
+{% endblock %}
+{% block main_lead %}
+    <span><strong>Plataformas:</strong>
+    {% for platform in player.platforms.all %}
+        {{ platform.name }}{% if not forloop.last %},{% else %}.{% endif %}
+    {% endfor %}
+{% endblock %}
 {% block content %}
     <div class="container">
-
-        <h1>{{ player.username }}</h1>
-        <span><strong>Plataformas:</strong>
-            {% for platform in player.platforms.all %}
-                {{ platform.name }}{% if not forloop.last %},{% else %}.{% endif %}
-            {% endfor %}
-        </span>
 
         <div class="mt-2">
             <div class="row">
