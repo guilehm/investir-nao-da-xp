@@ -14,9 +14,27 @@
     <title>Investir != XP</title>
 </head>
 <body>
+
     <div class="jumbotron">
         <div class="container">
-            <h1 class="display-3">Investir não dá XP</h1>
+            <h1 class="display-2">
+                {% block main_title %}
+                    Investir não dá XP
+                {% endblock %}
+            </h1>
+            <hr class="my-4">
+            {% block main_lead %}
+                <p class="lead">
+                    encontre suas estatísticas do Fortnite
+                </p>
+            {% endblock %}
+            {% block search_form %}
+                <form method="post" class="form-inline my-2 my-lg-0">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-outline-success mb-3" type="submit">Pesquisar</button>
+                </form>
+            {% endblock %}
         </div>
     </div>
 
