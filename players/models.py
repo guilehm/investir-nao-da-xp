@@ -9,6 +9,7 @@ class Player(models.Model):
     username = models.CharField(max_length=50, unique=True)
     platforms = models.ManyToManyField('core.Platform', related_name='players', blank=True)
     seasons = models.ManyToManyField('core.Season', related_name='players', blank=True)
+    friend = models.BooleanField(default=False)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
