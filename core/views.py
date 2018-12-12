@@ -1,11 +1,9 @@
-from django import forms
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from communications.models import Communication
 from core.forms import SearchForm
 from core.models import Platform
 from players.models import Player
-from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -23,6 +21,7 @@ def index(request):
             communication = communication.communicate(platform=platform.name, username=username)
             if not communication.error:
                 communication.create_player_stats()
+                return redirect('core:player-detail', username=communication.player_stats.player.username)
     return render(request, 'core/index.html', {
         'players': players,
         'platforms': platforms,
