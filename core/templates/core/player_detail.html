@@ -7,8 +7,9 @@
 {% block main_lead %}
     <span><strong>Plataformas:</strong>
     {% for platform in player.platforms.all %}
-        {{ platform.name }}{% if not forloop.last %},{% else %}.{% endif %}
+        <a href="?platform={{ platform.name }}" class="text-dark">{{ platform.name }}</a>{% if not forloop.last %},{% else %}.{% endif %}
     {% endfor %}
+    </span>
 {% endblock %}
 {% block content %}
     <div class="container">
