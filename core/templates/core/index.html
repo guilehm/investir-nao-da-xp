@@ -3,13 +3,5 @@
 {% load i18n %}
 {% language 'pt-BR' %}
 {% block content %}
-<div class="container mb-4">
-    <h3>Pesquise</h3>
-    <form method="post" class="form-inline my-2 my-lg-0">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-outline-success mb-3" type="submit">Pesquisar</button>
-    </form>
-</div>
 {% endblock %}
 {% endlanguage %}
