@@ -53,9 +53,14 @@ class Communication(models.Model):
             platform, created = Platform.objects.get_or_create(
                 name=self.data.get('platformName')
             )
-            if created:
+            save = False
+            if not platform.epic_id:
                 platform.epic_id = self.data.get('platformId')
+                save = True
+            if not platform.name_long:
                 platform.name_long = self.data.get('platformNameLong')
+                save = True
+            if save:
                 platform.save()
             return platform
 
