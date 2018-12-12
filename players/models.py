@@ -16,6 +16,9 @@ class Player(models.Model):
     def __str__(self):
         return f'{self.username}'
 
+    def last_platform(self):
+        return self.statuses.last().platform.name
+
 
 class PlayerStats(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -32,7 +35,7 @@ class PlayerStats(models.Model):
     stats_lifetime = JSONField(null=True, blank=True)
     recent_matches = JSONField(null=True, blank=True)
 
-    date_added = models.DateTimeField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -40,6 +43,7 @@ class PlayerStats(models.Model):
 
     class Meta:
         verbose_name_plural = 'player statuses'
+        ordering = ('date_added',)
 
     def save(self, *args, **kwargs):
         if not self.data.get('error'):
