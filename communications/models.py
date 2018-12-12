@@ -46,7 +46,7 @@ class Communication(models.Model):
         if response.ok and not self.data.get('error'):
             self.error = False
         self.save()
-        return self.data
+        return self
 
     def _get_platform(self):
         if not self.error:

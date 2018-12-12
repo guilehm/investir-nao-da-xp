@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from core.models import Platform
-from communications.models import Communication
-from players.models import Player
 from django import forms
+from django.shortcuts import render
+
+from communications.models import Communication
 from core.forms import SearchForm
+from core.models import Platform
+from players.models import Player
 
 
 def index(request):
@@ -18,8 +19,8 @@ def index(request):
             communication = Communication.objects.create(
                 method='profile_data',
             )
-            success = communication.communicate(platform=platform.name, username=username)
-            if success:
+            communication = communication.communicate(platform=platform.name, username=username)
+            if not communication.error:
                 communication.create_player_stats()
     return render(request, 'core/index.html', {
         'players': players,
