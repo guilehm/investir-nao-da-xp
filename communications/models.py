@@ -35,9 +35,9 @@ class Communication(models.Model):
         return f'Communication #{self.id}'
 
     def communicate(self, **data):
-        url = URLS.get(self.method)
+        url = URLS.get(self.method).format(**data)
         response = requests.get(
-            url=url.format(**data),
+            url=url,
             headers=HEADERS,
             data=dict(data),
         )
@@ -45,8 +45,8 @@ class Communication(models.Model):
         self.url = url
         if response.ok and not self.data.get('error'):
             self.error = False
-            self.save()
-            return self.data
+        self.save()
+        return self.data
 
     def _get_platform(self):
         if not self.error:
