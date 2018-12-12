@@ -10,7 +10,7 @@ class Platform(models.Model):
     date_changed = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name_long}'
 
 
 class Season(models.Model):
