@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
-
+from django.contrib import messages
 from communications.models import Communication
 from core.forms import SearchForm
 from core.models import Platform
@@ -22,6 +22,12 @@ def index(request):
             if not communication.error:
                 communication.create_player_stats()
                 return redirect('core:player-detail', username=communication.player_stats.player.username)
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    f'Usuário <strong>{username}</strong> não encontrado. Confira os dados ou selecione outra plataforma.'
+                )
     return render(request, 'core/index.html', {
         'players': players,
         'platforms': platforms,
