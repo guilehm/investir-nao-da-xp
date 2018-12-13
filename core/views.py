@@ -4,6 +4,7 @@ from communications.models import Communication
 from core.forms import SearchForm
 from core.models import Platform
 from players.models import Player
+from communications.utils import get_match_history
 
 
 def index(request):
@@ -26,7 +27,8 @@ def index(request):
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    f'Usuário <strong>{username}</strong> não encontrado. Confira os dados ou selecione outra plataforma.'
+                    f'Usuário <strong>{username}</strong> não encontrado. '
+                    'Confira os dados ou selecione outra plataforma.'
                 )
     return render(request, 'core/index.html', {
         'players': players,
@@ -42,6 +44,7 @@ def player_detail(request, username):
     if platform not in platforms:
         platform = player.last_platform()
     status = player.statuses.filter(platform__name=platform).last()
+    get_match_history(player.uid)  # TODO: Refactor
     return render(request, 'core/player_detail.html', {
         'player': player,
         'status': status,
