@@ -5,7 +5,7 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from core.models import Platform
-from players.models import Player, PlayerStats, Matches
+from players.models import Matches, Player, PlayerStats
 from xp.settings import TRN_API_KEY
 
 HEADERS = {'TRN-Api-Key': TRN_API_KEY}
