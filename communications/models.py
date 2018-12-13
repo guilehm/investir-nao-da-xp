@@ -5,13 +5,13 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from core.models import Platform
-from players.models import Player, PlayerStats
+from players.models import Player, PlayerStats, Matches
 from xp.settings import TRN_API_KEY
 
 HEADERS = {'TRN-Api-Key': TRN_API_KEY}
 URLS = {
     'profile_data': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
-    'recent_matches': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
+    'match_history': 'https://api.fortnitetracker.com/v1/profile/account/{account_id}/matches',
 }
 
 
@@ -44,7 +44,7 @@ class Communication(models.Model):
         )
         self.data = response.json()
         self.url = url
-        if response.ok and not self.data.get('error'):
+        if response.ok:  # TODO: Improve validation
             self.error = False
         self.save()
         return self
@@ -86,3 +86,14 @@ class Communication(models.Model):
             self.player_stats = player_stats
             player_stats.save()
             self.save()
+
+    def create_matches(self, account_id):
+        if not self.error:
+            player = Player.objects.get(uid=account_id)
+            for m in self.data:
+                match, _ = Matches.objects.get_or_create(
+                    public_id=m['id'],
+                    player=player,
+                )
+                match.data = m
+                match.save()
