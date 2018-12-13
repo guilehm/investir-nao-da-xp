@@ -63,6 +63,9 @@ class PlayerStats(models.Model):
 
 class Matches(models.Model):
     public_id = models.CharField(max_length=100, unique=True)
+    player = models.ForeignKey(
+        'players.Player', related_name='matches', on_delete=models.CASCADE,
+    )
     data = JSONField(null=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
