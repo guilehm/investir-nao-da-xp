@@ -59,3 +59,11 @@ class PlayerStats(models.Model):
             if not self.recent_matches:
                 self.recent_matches = self.data['recentMatches']
         return super().save(*args, **kwargs)
+
+
+class Matches(models.Model):
+    public_id = models.CharField(max_length=100, unique=True)
+    data = JSONField(null=True)
+
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_changed = models.DateTimeField(auto_now=True)
