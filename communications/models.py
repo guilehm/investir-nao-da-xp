@@ -11,6 +11,7 @@ from xp.settings import TRN_API_KEY
 HEADERS = {'TRN-Api-Key': TRN_API_KEY}
 URLS = {
     'profile_data': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
+    'recent_matches': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
 }
 
 
