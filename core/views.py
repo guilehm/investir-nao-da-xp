@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-from communications.models import Communication
+from django.shortcuts import get_object_or_404, redirect, render
+
+from communications.utils import get_match_history, get_profile_data
 from core.forms import SearchForm
 from core.models import Platform
 from players.models import Player
-from communications.utils import get_match_history
 
 
 def index(request):
@@ -16,12 +16,8 @@ def index(request):
         if form.is_valid():
             username = form.cleaned_data['username']
             platform = form.cleaned_data['platforms']
-            communication = Communication.objects.create(
-                method='profile_data',
-            )
-            communication = communication.communicate(platform=platform.name, username=username)
+            communication = get_profile_data(username, platform)
             if not communication.error:
-                communication.create_player_stats()
                 return redirect('core:player-detail', username=communication.player_stats.player.username)
             else:
                 messages.add_message(
