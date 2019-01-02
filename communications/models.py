@@ -46,11 +46,12 @@ class Communication(models.Model):
         self.url = url
         if response.ok:  # TODO: Improve validation
             try:
-                self.data.get('error')
+                error = self.data.get('error')
             except AttributeError:
                 self.error = False
             else:
-                self.error = False
+                if not error:
+                    self.error = False
         self.save()
         return self
 
