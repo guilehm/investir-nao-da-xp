@@ -44,7 +44,7 @@ class Communication(models.Model):
         )
         self.data = response.json()
         self.url = url
-        if response.ok:  # TODO: Improve validation
+        if response.ok and not self.data.get('error'):  # TODO: Improve validation
             self.error = False
         self.save()
         return self
