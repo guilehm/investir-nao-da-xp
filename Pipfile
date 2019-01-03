@@ -20,6 +20,7 @@ dj-static = "*"
 "static3" = "*"
 gunicorn = "*"
 django-debug-toolbar = "*"
+docker-compose = "*"
 
 [requires]
 python_version = "3.6"
