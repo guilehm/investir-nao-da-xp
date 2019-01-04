@@ -27,8 +27,8 @@ SECRET_KEY = 'itcb@0!ihr(#o25iv%c1pxw4kkp5rk=8_0@s8-a-x8$q$ml%u4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-INTERNAL_IPS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
+INTERNAL_IPS = ['*']
 
 
 # Application definition
@@ -85,12 +85,14 @@ WSGI_APPLICATION = 'xp.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -158,7 +160,7 @@ LOGGING = {
 if os.getcwd() == '/app':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-    ALLOWED_HOSTS = ['investir-xp.herokuapp.com']
+    ALLOWED_HOSTS = ['*']
 
     DEBUG = False
 
