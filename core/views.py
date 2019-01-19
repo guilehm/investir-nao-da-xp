@@ -10,27 +10,29 @@ from players.models import Player
 def index(request):
     players = Player.objects.all()
     platforms = Platform.objects.all()
-    form = SearchForm()
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            platform = form.cleaned_data['platforms']
-            communication = get_profile_data(username, platform)
-            if not communication.error:
-                return redirect('core:player-detail', username=communication.player_stats.player.username)
-            else:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    f'Usuário <strong>{username}</strong> não encontrado. '
-                    'Confira os dados ou selecione outra plataforma.'
-                )
     return render(request, 'core/index.html', {
         'players': players,
         'platforms': platforms,
-        'form': form,
     })
+
+
+def player_search(request):
+    if not request.method == 'POST':
+        return render(request, 'core/index.html')
+    form = SearchForm(request.POST)
+    if form.is_valid():
+        username = form.cleaned_data['username']
+        platform = form.cleaned_data['platforms']
+        communication = get_profile_data(username, platform)
+        if communication.error:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                f'Usuário <strong>{username}</strong> não encontrado. '
+                'Confira os dados ou selecione outra plataforma.'
+            )
+            return redirect(request.META.get('HTTP_REFERER'))
+        return redirect('core:player-detail', username=communication.player_stats.player.username)
 
 
 def player_detail(request, username):

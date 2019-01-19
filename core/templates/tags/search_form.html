@@ -1,0 +1,7 @@
+{% block search_form %}
+    <form method="post" action="{% url 'core:player-search' %}" class="form-inline my-2 my-lg-0">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-outline-success mb-3" type="submit">Pesquisar</button>
+    </form>
+{% endblock %}
