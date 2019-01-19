@@ -20,6 +20,9 @@ class Player(models.Model):
     def last_platform(self):
         return self.statuses.last().platform.name
 
+    def status(self):
+        return self.statuses.last()
+
 
 class PlayerStats(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
