@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from urllib.parse import urlparse
 
 import dj_database_url
 
@@ -154,17 +155,39 @@ LOGGING = {
     }
 }
 
+CACHE_TIMEOUT = 15 * 60
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        'TIMEOUT': CACHE_TIMEOUT,
+    }
+}
 
 if os.getcwd() == '/app':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
     ALLOWED_HOSTS = ['investir-xp.herokuapp.com']
-
     DEBUG = False
 
-    # Config for staticfiles
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     STATIC_ROOT = 'staticfiles'
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
     )
+
+    cache_url = urlparse(os.environ.get('REDIS_URL'))
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            'LOCATION': '{}://{}:{}'.format(
+                cache_url.scheme, cache_url.hostname, cache_url.port
+            ),
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient"
+            },
+            'TIMEOUT': CACHE_TIMEOUT,
+        }
+    }
