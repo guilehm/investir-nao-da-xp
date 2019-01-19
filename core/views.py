@@ -6,14 +6,16 @@ from communications.models import Communication
 from communications.utils import get_profile_data
 from core.forms import SearchForm
 from core.models import Platform
-from players.models import Player
+from players.models import Friend, Player
 
 
 def index(request):
     players = Player.objects.all()
+    friends = Friend.objects.all()
     platforms = Platform.objects.all()
     return render(request, 'core/index.html', {
         'players': players,
+        'friends': friends,
         'platforms': platforms,
     })
 
