@@ -186,7 +186,8 @@ if os.getcwd() == '/app':
                 cache_url.scheme, cache_url.hostname, cache_url.port
             ),
             "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient"
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                'PASSWORD': cache_url.password,
             },
             'TIMEOUT': CACHE_TIMEOUT,
         }
