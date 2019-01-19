@@ -21,6 +21,7 @@ dj-static = "*"
 gunicorn = "*"
 django-debug-toolbar = "*"
 django-redis = "*"
+celery = "*"
 
 [requires]
 python_version = "3.6"
