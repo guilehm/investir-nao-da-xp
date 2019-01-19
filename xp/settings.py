@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'communications',
     'players',
     'core',
+    'xp',
 ]
 
 MIDDLEWARE = [
@@ -167,6 +168,8 @@ CACHES = {
     }
 }
 
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+
 if os.getcwd() == '/app':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     ALLOWED_HOSTS = ['investir-xp.herokuapp.com']
@@ -192,3 +195,8 @@ if os.getcwd() == '/app':
             'TIMEOUT': CACHE_TIMEOUT,
         }
     }
+
+    CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL')
+    CELERY_RESULT_BACKEND = os.environ.get('CLOUDAMQP_URL')
+    CELERY_BROKER_POOL_LIMIT = 1
+    CELERY_BROKER_CONNECTION_TIMEOUT = 10
