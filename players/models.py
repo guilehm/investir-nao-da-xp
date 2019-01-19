@@ -70,3 +70,12 @@ class Matches(models.Model):
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
+
+
+class Friend(models.Model):
+    player = models.ForeignKey(
+        'players.Player', related_name='friends', on_delete=models.CASCADE
+    )
+
+    date_added = models.DateTimeField(auto_now_add=True)
+    date_changed = models.DateTimeField(auto_now=True)
