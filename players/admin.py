@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from players.models import Matches, Player, PlayerStats
+from players.models import Matches, Player, PlayerStats, Friend
 
 
 @admin.register(Player)
@@ -25,3 +25,8 @@ class MatchesAdmin(admin.ModelAdmin):
     list_filter = ('player', 'date_added')
     search_fields = ('player__username', 'data')
     readonly_fields = ('date_added', 'date_changed')
+
+
+@admin.register(Friend)
+class FriendAdmin(admin.ModelAdmin):
+    list_display = ('id', 'player')
