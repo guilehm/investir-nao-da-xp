@@ -29,4 +29,4 @@ class MatchesAdmin(admin.ModelAdmin):
 
 @admin.register(Friend)
 class FriendAdmin(admin.ModelAdmin):
-    list_display = ('id', 'player')
+    list_display = ('id', 'player', 'date_added')
