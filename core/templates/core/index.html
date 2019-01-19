@@ -3,6 +3,7 @@
 {% load i18n %}
 {% language 'pt-BR' %}
 {% block content %}
+    {% if friends %}
     <div id="friends" class="container">
         <h1 class="text-center mb-4">Amigos</h1>
         {% for friend in friends %}
@@ -97,5 +98,6 @@
             </div>
         {% endfor %}
     </div>
+    {% endif %}
 {% endblock %}
 {% endlanguage %}

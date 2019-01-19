@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from players.models import Matches, Player, PlayerStats, Friend
+from players.models import Friend, Matches, Player, PlayerStats
 
 
 @admin.register(Player)
