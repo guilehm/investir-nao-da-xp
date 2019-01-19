@@ -17,21 +17,22 @@ def index(request):
 
 
 def player_search(request):
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            platform = form.cleaned_data['platforms']
-            communication = get_profile_data(username, platform)
-            if communication.error:
-                messages.add_message(
-                    request,
-                    messages.ERROR,
-                    f'Usuário <strong>{username}</strong> não encontrado. '
-                    'Confira os dados ou selecione outra plataforma.'
-                )
-                return redirect(request.META.get('HTTP_REFERER'))
-            return redirect('core:player-detail', username=communication.player_stats.player.username)
+    if not request.method == 'POST':
+        return render(request, 'core/index.html')
+    form = SearchForm(request.POST)
+    if form.is_valid():
+        username = form.cleaned_data['username']
+        platform = form.cleaned_data['platforms']
+        communication = get_profile_data(username, platform)
+        if communication.error:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                f'Usuário <strong>{username}</strong> não encontrado. '
+                'Confira os dados ou selecione outra plataforma.'
+            )
+            return redirect(request.META.get('HTTP_REFERER'))
+        return redirect('core:player-detail', username=communication.player_stats.player.username)
 
 
 def player_detail(request, username):
