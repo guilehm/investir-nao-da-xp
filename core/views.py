@@ -1,7 +1,9 @@
 from django.contrib import messages
+from django.core.cache import cache
 from django.shortcuts import get_object_or_404, redirect, render
 
-from communications.utils import get_match_history, get_profile_data
+from communications.models import Communication
+from communications.utils import get_profile_data
 from core.forms import SearchForm
 from core.models import Platform
 from players.models import Player
@@ -23,15 +25,24 @@ def player_search(request):
     if form.is_valid():
         username = form.cleaned_data['username']
         platform = form.cleaned_data['platforms']
-        communication = get_profile_data(username, platform)
-        if communication.error:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                f'Usuário <strong>{username}</strong> não encontrado. '
-                'Confira os dados ou selecione outra plataforma.'
-            )
-            return redirect(request.META.get('HTTP_REFERER'))
+        cache_name = 'status-{platform}-{username}'.format(
+            platform=platform.name,
+            username=username,
+        )
+        has_data = cache.get(cache_name)
+        if has_data:
+            communication = Communication.objects.get(id=has_data)
+        else:
+            communication = get_profile_data(username, platform)
+            if communication.error:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    f'Usuário <strong>{username}</strong> não encontrado. '
+                    'Confira os dados ou selecione outra plataforma.'
+                )
+                return redirect(request.META.get('HTTP_REFERER'))
+            cache.set(cache_name, communication.id)
         return redirect('core:player-detail', username=communication.player_stats.player.username)
 
 
@@ -42,7 +53,7 @@ def player_detail(request, username):
     if platform not in platforms:
         platform = player.last_platform()
     status = player.statuses.filter(platform__name=platform).last()
-    get_match_history(player.uid)  # TODO: Refactor
+    # get_match_history(player.uid)  # TODO: Refactor
     return render(request, 'core/player_detail.html', {
         'player': player,
         'status': status,

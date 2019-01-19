@@ -155,7 +155,7 @@ LOGGING = {
     }
 }
 
-CACHE_TIMEOUT = 15 * 60
+CACHE_TIMEOUT = 3 * 60
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
