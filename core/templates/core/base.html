@@ -1,4 +1,5 @@
 {% load static %}
+{% load core_tags %}
 {% load i18n %}
 {% language 'pt-BR' %}
 <!doctype html>
@@ -45,13 +46,7 @@
                     encontre suas estatísticas do Fortnite
                 </p>
             {% endblock %}
-            {% block search_form %}
-                <form method="post" class="form-inline my-2 my-lg-0">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn btn-outline-success mb-3" type="submit">Pesquisar</button>
-                </form>
-            {% endblock %}
+            {% search_form %}
             {% block messages %}
                 {% if messages %}
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
