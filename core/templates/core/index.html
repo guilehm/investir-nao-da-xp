@@ -3,5 +3,99 @@
 {% load i18n %}
 {% language 'pt-BR' %}
 {% block content %}
+    <div id="friends" class="container">
+        <h1 class="text-center mb-4">Amigos</h1>
+        {% for friend in friends %}
+            <h6 class="text-center">{{ friend.player.username }}</h6>
+            <div class="row">
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Solos</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{ friend.player.status.stats_solo.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{ friend.player.status.stats_solo.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 10: <strong>{{ friend.player.status.stats_solo.top10.value }}</strong></p>
+                                    <p class="card-text">Top 25: <strong>{{ friend.player.status.stats_solo.top25.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{ friend.player.status.stats_solo.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{ friend.player.status.stats_solo.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap">Pontos: <strong>{{ friend.player.status.stats_solo.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{ friend.player.status.stats_solo.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{ friend.player.status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Duos</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{friend.player.status.stats_duo.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{friend.player.status.stats_duo.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 5: <strong>{{friend.player.status.stats_duo.top5.value }}</strong></p>
+                                    <p class="card-text">Top 12: <strong>{{friend.player.status.stats_duo.top12.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{friend.player.status.stats_duo.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{friend.player.status.stats_duo.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap">Pontos: <strong>{{friend.player.status.stats_duo.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{friend.player.status.stats_duo.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{friend.player.status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Squad</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{friend.player.status.stats_squad.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{friend.player.status.stats_squad.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 3: <strong>{{friend.player.status.stats_squad.top3.value }}</strong></p>
+                                    <p class="card-text">Top 6: <strong>{{friend.player.status.stats_squad.top6.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{friend.player.status.stats_squad.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{friend.player.status.stats_squad.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap;">Pontos: <strong>{{friend.player.status.stats_squad.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{friend.player.status.stats_squad.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{friend.player.status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 {% endlanguage %}
