@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "39fbb668b054b3e953ad244a13cd015e22b79988da2a24b79cb58a9ce2291e08"
+            "sha256": "4851f22755b391688909ba8f3fbc84336acc56b370bee06e21465d50ef5421b7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -617,6 +617,14 @@
                 "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"
             ],
             "version": "==0.5.1"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:118ab3e5f815d380171b100b05b76de2a07612f422368a201a9ffdeefb2251c1",
+                "sha256:42133ddd5229eeb6a0c9899496bdbe56c292394bf8666da77deeb27454c0456a"
+            ],
+            "index": "pypi",
+            "version": "==4.1.2"
         },
         "widgetsnbextension": {
             "hashes": [

@@ -22,6 +22,7 @@ gunicorn = "*"
 django-debug-toolbar = "*"
 django-redis = "*"
 celery = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.6"
