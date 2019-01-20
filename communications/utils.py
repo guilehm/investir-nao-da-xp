@@ -1,13 +1,24 @@
+from django.core.cache import cache
+
 from communications.models import Communication
 
 
 def get_profile_data(username, platform):
-    communication = Communication.objects.create(
-        method='profile_data',
+    cache_name = 'status-{platform}-{username}'.format(
+        platform=platform.name,
+        username=username,
     )
-    communication = communication.communicate(platform=platform.name, username=username)
-    if not communication.error:
-        communication.create_player_stats()
+    has_data = cache.get(cache_name)
+    if has_data:
+        communication = Communication.objects.get(id=has_data)
+    else:
+        communication = Communication.objects.create(
+            method='profile_data',
+        )
+        communication = communication.communicate(platform=platform.name, username=username)
+        if not communication.error:
+            communication.create_player_stats()
+            cache.set(cache_name, communication.id)
     return communication
 
 
