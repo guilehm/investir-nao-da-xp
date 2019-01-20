@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from communications.utils import get_profile_data
 from core.forms import SearchForm
+from core.tasks import get_friends_status
 from core.models import Platform
 from players.models import Friend, Player
 
@@ -11,6 +12,7 @@ def index(request):
     players = Player.objects.all()
     friends = Friend.objects.all()
     platforms = Platform.objects.all()
+    get_friends_status.delay()
     return render(request, 'core/index.html', {
         'players': players,
         'friends': friends,
