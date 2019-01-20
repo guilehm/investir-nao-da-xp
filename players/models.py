@@ -18,7 +18,10 @@ class Player(models.Model):
         return f'{self.username}'
 
     def last_platform(self):
-        return self.statuses.last().platform.name
+        return self.statuses.last().platform
+
+    def last_platform_name(self):
+        return self.last_platform().name
 
     def status(self):
         return self.statuses.last()
