@@ -1,3 +1,4 @@
+import re
 import uuid
 
 from django.contrib.postgres.fields import JSONField
@@ -16,6 +17,11 @@ class Player(models.Model):
 
     def __str__(self):
         return f'{self.username}'
+
+    @property
+    def clean_uid(self):
+        if self.uid:
+            return self.uid.replace('-', '')
 
     def last_platform(self):
         return self.statuses.last().platform
