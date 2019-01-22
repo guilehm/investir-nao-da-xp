@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from communications.utils import get_profile_data
 from core.forms import SearchForm
-from core.tasks import get_friends_status
 from core.models import Platform
+from core.tasks import get_friends_status
 from players.models import Friend, Player
 
 
