@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% block main_title %}
+    {{ player.username }}
+{% endblock %}
+{% block search_form %}
+{% endblock %}
+{% block main_lead %}
+    <span><strong>Plataformas:</strong>
+    {% for platform in player.platforms.all %}
+        <a href="?platform={{ platform.name }}" class="text-dark">{{ platform.name }}</a>{% if not forloop.last %},{% else %}.{% endif %}
+    {% endfor %}
+    </span>
+{% endblock %}
+{% block content %}
+    <div class="container">
+
+        <div class="mt-2">
+            <div class="row">
+
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Solos</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{ status.stats_solo.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{ status.stats_solo.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 10: <strong>{{ status.stats_solo.top10.value }}</strong></p>
+                                    <p class="card-text">Top 25: <strong>{{ status.stats_solo.top25.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{ status.stats_solo.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{ status.stats_solo.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap">Pontos: <strong>{{ status.stats_solo.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{ status.stats_solo.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{ status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Duos</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{ status.stats_duo.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{ status.stats_duo.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 5: <strong>{{ status.stats_duo.top5.value }}</strong></p>
+                                    <p class="card-text">Top 12: <strong>{{ status.stats_duo.top12.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{ status.stats_duo.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{ status.stats_duo.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap">Pontos: <strong>{{ status.stats_duo.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{ status.stats_duo.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{ status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h3 class="card-title text-center mb-0">Squad</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Vitórias: <strong>{{ status.stats_squad.top1.value }}</strong></p>
+                                    <p class="card-text">Vitórias %: <strong>{{ status.stats_squad.winRatio.value }}</strong></p>
+                                    <p class="card-text">Top 3: <strong>{{ status.stats_squad.top3.value }}</strong></p>
+                                    <p class="card-text">Top 6: <strong>{{ status.stats_squad.top6.value }}</strong></p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <p class="card-text">Kills: <strong>{{ status.stats_squad.kills.value }}</strong></p>
+                                    <p class="card-text">K/D: <strong>{{ status.stats_squad.kd.value }}</strong></p>
+                                    <p class="card-text" style="white-space: nowrap;">Pontos: <strong>{{ status.stats_squad.score.value }}</strong></p>
+                                    <p class="card-text">PPP: <strong>{{ status.stats_squad.scorePerMatch.value }}</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Data de atualização: {{ status.date_added|date:'H:i - d/m/y' }}</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
