@@ -35,18 +35,27 @@ def get_match_history(account_id):
 
 
 def get_stats_by_season(user_id, user_clean_uid, platform_name, season):
-    communication = Communication.objects.create(
-        method='stats_by_season'
-    )
-    communication = communication.communicate_gaming_sdk(
-        user_uid=user_clean_uid,
+    cache_name = 'status-by-season-{platform}-{user_clean_uid}'.format(
         platform=platform_name,
-        window=season,
+        user_clean_uid=user_clean_uid,
     )
-    if not communication.error:
-        player = Player.objects.get(id=user_id)
-        platform = Platform.objects.get(name=platform_name)
-        communication.create_player_stats_by_season(
-            player=player, platform=platform,
+    has_data = cache.get(cache_name)
+    if has_data:
+        communication = Communication.objects.get(id=has_data)
+    else:
+        communication = Communication.objects.create(
+            method='stats_by_season'
         )
+        communication = communication.communicate_gaming_sdk(
+            user_uid=user_clean_uid,
+            platform=platform_name,
+            window=season,
+        )
+        if not communication.error:
+            player = Player.objects.get(id=user_id)
+            platform = Platform.objects.get(name=platform_name)
+            communication.create_player_stats_by_season(
+                player=player, platform=platform,
+            )
+            cache.set(cache_name, communication.id)
     return communication
