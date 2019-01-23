@@ -58,7 +58,9 @@ class PlayerStats(models.Model):
         ordering = ('date_added',)
 
     def save(self, *args, **kwargs):
-        if not self.data.get('error'):
+        error = self.data.get('error')
+        window_name = self.data.get('window')
+        if not error and not window_name:
             if not self.stats_solo:
                 self.stats_solo = self.data['stats'].get('p2')
             if not self.stats_duo:
