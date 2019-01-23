@@ -1,6 +1,8 @@
 from django.core.cache import cache
 
 from communications.models import Communication
+from players.models import Player
+from core.models import Platform
 
 
 def get_profile_data(username, platform):
@@ -29,4 +31,22 @@ def get_match_history(account_id):
     communication = communication.communicate(account_id=account_id)
     if not communication.error:
         communication.create_matches(account_id=account_id)
+    return communication
+
+
+def get_stats_by_season(user_id, user_clean_uid, platform_name, season):
+    communication = Communication.objects.create(
+        method='stats_by_season'
+    )
+    communication = communication.communicate_gaming_sdk(
+        user_uid=user_clean_uid,
+        platform=platform_name,
+        window=season,
+    )
+    if not communication.error:
+        player = Player.objects.get(id=user_id)
+        platform = Platform.objects.get(name=platform_name)
+        communication.create_player_stats_by_season(
+            player=player, platform=platform,
+        )
     return communication
