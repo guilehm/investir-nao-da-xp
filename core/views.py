@@ -58,13 +58,14 @@ def player_detail(request, username):
     })
 
 
-def player_detail_by_season(request, username, season_name):
+def player_detail_by_season(request, username, season_number):
     player = get_object_or_404(Player, username=username)
     platform_name = player.last_platform_name()
     try:
-        window, _ = Season.objects.get_or_create(name=season_name)  # TODO: Validate
-    except Season.DoesNotExist:
-        window = Season.objects.get(name='alltime')
+        season_name = 'season{number}'.format(number=int(season_number))
+    except ValueError:
+        season_name = 'alltime'
+    window, _ = Season.objects.get_or_create(name=season_name)
     stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)  # TODO: Cache
     return render(request, 'core/player_detail_by_season.html', {
         'player': player,
