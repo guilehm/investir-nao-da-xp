@@ -4,7 +4,7 @@ import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
-from core.models import Platform
+from core.models import Platform, Season
 from players.models import Matches, Player, PlayerStats
 from xp.settings import TRN_API_KEY
 
@@ -97,13 +97,27 @@ class Communication(models.Model):
             player = self._get_player()
             platform = self._get_platform()
             player.platforms.add(platform)
+            season, _ = Season.objects.get_or_create(name='alltime')
+            player_stats = PlayerStats.objects.create(
+                player=player,
+                platform=platform,
+                data=self.data,
+                window=season,
+            )
+            self.player_stats = player_stats
+            player_stats.save()
+            self.save()
+
+    def create_player_stats_by_season(self, player, platform):
+        if not self.error:
+            season_name = self.data.get('window')
+            season, _ = Season.objects.get_or_create(name=season_name)
             player_stats = PlayerStats.objects.create(
                 player=player,
                 platform=platform,
                 data=self.data,
             )
             self.player_stats = player_stats
-            player_stats.save()
             self.save()
 
     def create_matches(self, account_id):
