@@ -7,7 +7,7 @@
     <div id="friends" class="container">
         <h1 class="text-center mb-4">Amigos</h1>
         {% for friend in friends %}
-            <h6 class="text-center">{{ friend.player.username }}</h6>
+            <h6 class="text-center"><a href="{% url 'core:player-detail' friend.player.username %}" class="text-dark">{{ friend.player.username }}</a></h6>
             <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">
