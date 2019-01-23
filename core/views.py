@@ -45,9 +45,28 @@ def player_detail(request, username):
     platforms = [platform.name for platform in player.platforms.all()]
     if platform not in platforms:
         platform = player.last_platform_name()
-    status = player.statuses.filter(platform__name=platform).last()
+    window_name = request.GET.get('window') or 'alltime'
+    try:
+        window = Season.objects.get(name=window_name)
+    except Season.DoesNotExist:
+        window, _ = Season.objects.get_or_create(name='alltime')
+    status = player.statuses.filter(platform__name=platform, window=window).last()
     # get_match_history(player.uid)  # TODO: Refactor
     return render(request, 'core/player_detail.html', {
         'player': player,
-        'status': status,
+        'status': status,  # FIXME: Refactor
+    })
+
+
+def player_detail_by_season(request, username, season_name):
+    player = get_object_or_404(Player, username=username)
+    platform_name = player.last_platform_name()
+    try:
+        window, _ = Season.objects.get_or_create(name=season_name)  # TODO: Validate
+    except Season.DoesNotExist:
+        window = Season.objects.get(name='alltime')
+    stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)  # TODO: Cache
+    return render(request, 'core/player_detail_by_season.html', {
+        'player': player,
+        'status': stats,  # FIXME: Refactor
     })
