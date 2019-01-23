@@ -69,6 +69,26 @@ class PlayerStats(models.Model):
                 self.stats_lifetime = self.data['lifeTimeStats']
             if not self.recent_matches:
                 self.recent_matches = self.data['recentMatches']
+
+        if window_name and not error:
+            if not self.window:
+                window, _ = Season.objects.get_or_create(name=window_name)
+                self.window = window
+            if not self.stats_solo:
+                self.stats_solo = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_solo')
+                }
+            if not self.stats_duo:
+                self.stats_duo = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_duo')
+                }
+            if not self.stats_squad:
+                self.stats_squad = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_squad')
+                }
+            if not self.stats_lifetime:
+                self.stats_lifetime = self.data['totals']
+
         return super().save(*args, **kwargs)
 
 
