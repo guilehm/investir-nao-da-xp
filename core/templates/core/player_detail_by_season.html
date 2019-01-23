@@ -13,6 +13,11 @@
 {% endblock %}
 {% block content %}
     <div class="container">
+        <p class="text-center">
+            {% for season in seasons %}
+                <a href="{% url 'core:player-detail-by-season' player.username season.number %}" class="text-dark">{{ season }}</a> {% if not forloop.last %}|{% endif %}
+            {% endfor %}
+        </p>
 
         <div class="mt-2">
             <div class="row">
