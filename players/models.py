@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from core.models import Season
 
 
 class Player(models.Model):
@@ -46,6 +47,9 @@ class PlayerStats(models.Model):
     stats_squad = JSONField(null=True, blank=True)
     stats_lifetime = JSONField(null=True, blank=True)
     recent_matches = JSONField(null=True, blank=True)
+    window = models.ForeignKey(
+        'core.Season', related_name='statuses', on_delete=models.CASCADE, blank=True, null=True,
+    )
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True)
