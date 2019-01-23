@@ -1,8 +1,8 @@
 from django.core.cache import cache
 
 from communications.models import Communication
-from players.models import Player
 from core.models import Platform
+from players.models import Player
 
 
 def get_profile_data(username, platform):

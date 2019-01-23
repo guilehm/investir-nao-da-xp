@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
-from communications.utils import get_profile_data
+from communications.utils import get_profile_data, get_stats_by_season
 from core.forms import SearchForm
-from core.models import Platform
+from core.models import Platform, Season
 from core.tasks import get_friends_status
 from players.models import Friend, Player
 
