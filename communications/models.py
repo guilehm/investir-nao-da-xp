@@ -37,6 +37,17 @@ class Communication(models.Model):
     def __str__(self):
         return f'Communication #{self.id}'
 
+    def communicate_gaming_sdk(self, **data):
+        url = URLS.get(self.method).format(**data)
+        response = requests.get(url)
+        self.data = response.json()
+        self.url = url
+        if response.ok:
+            if self.data.get('response') == 200:
+                self.error = False
+        self.save()
+        return self
+
     def communicate(self, **data):
         url = URLS.get(self.method).format(**data)
         response = requests.get(
