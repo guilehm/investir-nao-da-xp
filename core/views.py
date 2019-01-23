@@ -51,10 +51,12 @@ def player_detail(request, username):
     except Season.DoesNotExist:
         window, _ = Season.objects.get_or_create(name='alltime')
     status = player.statuses.filter(platform__name=platform, window=window).last()
+    seasons = Season.objects.only_available()
     # get_match_history(player.uid)  # TODO: Refactor
     return render(request, 'core/player_detail.html', {
         'player': player,
         'status': status,  # FIXME: Refactor
+        'seasons': seasons,
     })
 
 
@@ -62,12 +64,16 @@ def player_detail_by_season(request, username, season_number):
     player = get_object_or_404(Player, username=username)
     platform_name = player.last_platform_name()
     try:
+        if season_number == 0:
+            raise ValueError
         season_name = 'season{number}'.format(number=int(season_number))
     except ValueError:
-        season_name = 'alltime'
+        return redirect('core:player-detail', username=username)
     window, _ = Season.objects.get_or_create(name=season_name)
-    stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)  # TODO: Cache
+    stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)
+    seasons = Season.objects.only_available()
     return render(request, 'core/player_detail_by_season.html', {
         'player': player,
         'status': stats,  # FIXME: Refactor
+        'seasons': seasons
     })
