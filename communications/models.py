@@ -4,7 +4,7 @@ import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
-from core.models import Platform, Season
+from core.models import Platform, Season, Item
 from players.models import Matches, Player, PlayerStats
 from xp.settings import TRN_API_KEY
 
@@ -14,7 +14,9 @@ URLS = {
     'match_history': 'https://api.fortnitetracker.com/v1/profile/account/{account_id}/matches',
     'stats_by_season': 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats?'
                        'user_id={user_uid}&platform={platform}&window={window}',
+    'all_items': 'https://fortnite-public-api.theapinetwork.com/prod09/items/list',
     'upcoming_items': 'https://fortnite-public-api.theapinetwork.com/prod09/upcoming/get',
+    'daily_store': 'https://fortnite-public-api.theapinetwork.com/prod09/store/get',
 }
 
 
@@ -40,6 +42,16 @@ class Communication(models.Model):
 
     def __str__(self):
         return f'Communication #{self.id}'
+
+    def communicate_get_items(self):
+        url = URLS.get(self.method)
+        response = requests.get(url)
+        self.data = response.json()
+        self.url = url
+        if response.ok:
+            self.error = False
+        self.save()
+        return self
 
     def communicate_gaming_sdk(self, user_uid, platform, window):
         platforms = {
