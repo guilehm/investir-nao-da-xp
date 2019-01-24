@@ -113,6 +113,7 @@ class Communication(models.Model):
                 platform=platform,
                 data=self.data,
                 window=season,
+                source=PlayerStats.SOURCE_FORTNITE_TRACKER,
             )
             self.player_stats = player_stats
             player_stats.save()
@@ -126,6 +127,7 @@ class Communication(models.Model):
                 player=player,
                 platform=platform,
                 data=self.data,
+                source=PlayerStats.SOURCE_PUBLIC_API,
             )
             self.player_stats = player_stats
             self.save()
