@@ -50,7 +50,9 @@ def player_detail(request, username):
         window = Season.objects.get(name=window_name)
     except Season.DoesNotExist:
         window, _ = Season.objects.get_or_create(name='alltime')
-    status = player.statuses.filter(platform__name=platform, window=window).last()
+    status = player.statuses.filter(
+        platform__name=platform, window=window, source='fortnite_tracker'
+    ).last()
     seasons = Season.objects.only_available()
     # get_match_history(player.uid)  # TODO: Refactor
     return render(request, 'core/player_detail.html', {
