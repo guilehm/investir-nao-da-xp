@@ -49,6 +49,13 @@ class Player(models.Model):
 
 
 class PlayerStats(models.Model):
+    SOURCE_PUBLIC_API = 'public_api'
+    SOURCE_FORTNITE_TRACKER = 'fortnite_tracker'
+    SOURCE_OPTIONS = (
+        (SOURCE_PUBLIC_API, 'Public API'),
+        (SOURCE_FORTNITE_TRACKER, 'Fortnite Tracker'),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     player = models.ForeignKey(
         'players.Player', related_name='statuses', on_delete=models.CASCADE,
@@ -65,6 +72,7 @@ class PlayerStats(models.Model):
     window = models.ForeignKey(
         'core.Season', related_name='statuses', on_delete=models.CASCADE, blank=True, null=True,
     )
+    source = models.CharField(max_length=500, choices=SOURCE_OPTIONS)
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -74,7 +82,7 @@ class PlayerStats(models.Model):
 
     class Meta:
         verbose_name_plural = 'player statuses'
-        ordering = ('-date_added',)
+        ordering = ('date_added',)
 
     def save(self, *args, **kwargs):
         error = self.data.get('error')
