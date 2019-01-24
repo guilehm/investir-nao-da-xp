@@ -1,8 +1,9 @@
-import re
 import uuid
 
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+
+from core.models import Season
 
 
 class Player(models.Model):
@@ -47,6 +48,9 @@ class PlayerStats(models.Model):
     stats_squad = JSONField(null=True, blank=True)
     stats_lifetime = JSONField(null=True, blank=True)
     recent_matches = JSONField(null=True, blank=True)
+    window = models.ForeignKey(
+        'core.Season', related_name='statuses', on_delete=models.CASCADE, blank=True, null=True,
+    )
 
     date_added = models.DateTimeField(auto_now_add=True, db_index=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -59,7 +63,9 @@ class PlayerStats(models.Model):
         ordering = ('date_added',)
 
     def save(self, *args, **kwargs):
-        if not self.data.get('error'):
+        error = self.data.get('error')
+        window_name = self.data.get('window')
+        if not error and not window_name:
             if not self.stats_solo:
                 self.stats_solo = self.data['stats'].get('p2')
             if not self.stats_duo:
@@ -70,6 +76,26 @@ class PlayerStats(models.Model):
                 self.stats_lifetime = self.data['lifeTimeStats']
             if not self.recent_matches:
                 self.recent_matches = self.data['recentMatches']
+
+        if window_name and not error:
+            if not self.window:
+                window, _ = Season.objects.get_or_create(name=window_name)
+                self.window = window
+            if not self.stats_solo:
+                self.stats_solo = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_solo')
+                }
+            if not self.stats_duo:
+                self.stats_duo = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_duo')
+                }
+            if not self.stats_squad:
+                self.stats_squad = {
+                    k: v for k, v in self.data['stats'].items() if isinstance(k, str) and k.endswith('_squad')
+                }
+            if not self.stats_lifetime:
+                self.stats_lifetime = self.data['totals']
+
         return super().save(*args, **kwargs)
 
 
