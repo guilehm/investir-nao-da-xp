@@ -34,7 +34,7 @@ class Player(models.Model):
         return self.last_platform().name
 
     def status(self):
-        return self.statuses.last()
+        return self.statuses.filter(source='fortnite_tracker').last()
 
     def assure_user_id_at_api_database(self):
         url = f'https://fortnite-public-api.theapinetwork.com/prod09/users/id?username={self.username}'
