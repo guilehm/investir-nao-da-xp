@@ -13,7 +13,8 @@ URLS = {
     'profile_data': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
     'match_history': 'https://api.fortnitetracker.com/v1/profile/account/{account_id}/matches',
     'stats_by_season': 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats?'
-                       'user_id={user_uid}&platform={platform}&window={window}'
+                       'user_id={user_uid}&platform={platform}&window={window}',
+    'upcoming_items': 'https://fortnite-public-api.theapinetwork.com/prod09/upcoming/get',
 }
 
 
