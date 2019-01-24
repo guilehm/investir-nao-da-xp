@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.cache import cache_page
 
 from communications.utils import get_profile_data, get_stats_by_season
 from core.forms import SearchForm
@@ -8,13 +10,12 @@ from core.tasks import get_friends_status
 from players.models import Friend, Player
 
 
+@cache_page(settings.CACHE_TIMEOUT)
 def index(request):
-    players = Player.objects.all()
     friends = Friend.objects.all()
     platforms = Platform.objects.all()
     get_friends_status.delay()
     return render(request, 'core/index.html', {
-        'players': players,
         'friends': friends,
         'platforms': platforms,
     })
