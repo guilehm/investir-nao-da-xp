@@ -34,3 +34,6 @@ class Season(models.Model):
         if not self.number:
             self.number = ''.join([char for char in self.name if char.isdigit()]) or 0
         super().save(*args, **kwargs)
+
+    class Meta:
+        ordering = ('-name',)

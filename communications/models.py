@@ -34,6 +34,9 @@ class Communication(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ('-date_added',)
+
     def __str__(self):
         return f'Communication #{self.id}'
 

@@ -74,7 +74,7 @@ class PlayerStats(models.Model):
 
     class Meta:
         verbose_name_plural = 'player statuses'
-        ordering = ('date_added',)
+        ordering = ('-date_added',)
 
     def save(self, *args, **kwargs):
         error = self.data.get('error')
