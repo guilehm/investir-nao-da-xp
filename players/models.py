@@ -1,11 +1,10 @@
 import logging
 import uuid
-
+import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from core.models import Season
-from core.tasks import assure_user_id_at_api_database
 
 logger = logging.getLogger(__name__)
 
@@ -37,11 +36,14 @@ class Player(models.Model):
     def status(self):
         return self.statuses.last()
 
+    def assure_user_id_at_api_database(self):
+        url = f'https://fortnite-public-api.theapinetwork.com/prod09/users/id?username={self.clean_uid}'
+        requests.get(url)
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-
         try:
-            assure_user_id_at_api_database.delay(self.clean_uid)
+            self.assure_user_id_at_api_database()
         except Exception as e:
             logger.exception(e)
 
