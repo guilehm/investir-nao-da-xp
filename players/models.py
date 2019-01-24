@@ -1,9 +1,13 @@
+import logging
 import uuid
 
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from core.models import Season
+from core.tasks import assure_user_id_at_api_database
+
+logger = logging.getLogger(__name__)
 
 
 class Player(models.Model):
@@ -32,6 +36,14 @@ class Player(models.Model):
 
     def status(self):
         return self.statuses.last()
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        try:
+            assure_user_id_at_api_database.delay(self.clean_uid)
+        except Exception as e:
+            logger.exception(e)
 
 
 class PlayerStats(models.Model):
