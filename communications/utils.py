@@ -35,8 +35,9 @@ def get_match_history(account_id):
 
 
 def get_stats_by_season(user_id, user_clean_uid, platform_name, season):
-    cache_name = 'status-by-season-{platform}-{user_clean_uid}'.format(
+    cache_name = 'status-by-season-{platform}-{season}-{user_clean_uid}'.format(
         platform=platform_name,
+        season=season,
         user_clean_uid=user_clean_uid,
     )
     has_data = cache.get(cache_name)
