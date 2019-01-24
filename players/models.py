@@ -37,7 +37,7 @@ class Player(models.Model):
         return self.statuses.last()
 
     def assure_user_id_at_api_database(self):
-        url = f'https://fortnite-public-api.theapinetwork.com/prod09/users/id?username={self.clean_uid}'
+        url = f'https://fortnite-public-api.theapinetwork.com/prod09/users/id?username={self.username}'
         requests.get(url)
 
     def save(self, *args, **kwargs):
