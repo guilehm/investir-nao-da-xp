@@ -1,7 +1,7 @@
-from django.db import models
+import uuid
 
 from django.contrib.postgres.fields import JSONField
-import uuid
+from django.db import models
 
 
 class SeasonManager(models.QuerySet):
