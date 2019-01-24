@@ -13,7 +13,7 @@ class PlayerAdmin(admin.ModelAdmin):
 
 @admin.register(PlayerStats)
 class PlayerStatsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'player', 'window', 'date_added')
+    list_display = ('id', 'player', 'window', 'source', 'date_added')
     list_filter = ('player', 'date_added')
     search_fields = ('player__username', 'data')
     readonly_fields = ('date_added', 'date_changed')
