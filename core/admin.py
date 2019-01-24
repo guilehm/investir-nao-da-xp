@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Platform, Season, Item
+from core.models import Item, Platform, Season
 
 
 @admin.register(Platform)
