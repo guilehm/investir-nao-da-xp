@@ -43,6 +43,8 @@ class Season(models.Model):
 class Item(models.Model):
     item_id = models.CharField(max_length=100)
     name = models.CharField(max_length=50, null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+    upcoming = models.SmallIntegerField(null=True, blank=True)
     cost = models.DecimalField(decimal_places=0, max_digits=9, null=True, blank=True)
     captial = models.CharField(max_length=50, null=True, blank=True)
     type = models.CharField(max_length=50, null=True, blank=True)
@@ -50,6 +52,7 @@ class Item(models.Model):
     obtained = models.CharField(max_length=50, null=True, blank=True)
     obtained_type = models.CharField(max_length=50, null=True, blank=True)
     ratings = JSONField(null=True, blank=True)
+    last_update = models.CharField(max_length=50, null=True, blank=True)
 
     image = models.URLField(null=True, blank=True)
     image_transparent = models.URLField(null=True, blank=True)
