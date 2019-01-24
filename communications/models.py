@@ -37,8 +37,15 @@ class Communication(models.Model):
     def __str__(self):
         return f'Communication #{self.id}'
 
-    def communicate_gaming_sdk(self, **data):
-        url = URLS.get(self.method).format(**data)
+    def communicate_gaming_sdk(self, user_uid, platform, window):
+        platforms = {
+            'pc': 'pc',
+            'psn': 'ps4',
+            'xbox': 'xb1',
+        }
+        url = URLS.get(self.method).format(
+            user_uid=user_uid, platform=platforms.get(platform), window=window
+        )
         response = requests.get(url)
         self.data = response.json()
         self.url = url
