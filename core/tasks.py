@@ -56,6 +56,7 @@ def create_item(data):
     formatted_data = extract_item_data(data)
     for key, value in formatted_data.items():
         setattr(item, key, value)
+    item.data = data
     item.save()
 
 
