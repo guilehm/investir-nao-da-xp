@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    <section class="text-center my-5">
+        <h2 class="h1-responsive font-weight-bold text-center my-5">Aleatórios</h2>
+        <p class="grey-text text-center w-responsive mx-auto mb-5">Apenas alguns itens aleatórios.</p>
+        <div class="container-fluid">
+            <div class="row">
+                {% for item in items %}
+                    <div class="col-lg-3 col-md-6 mb-lg-0 mb-4">
+                        <div class="card collection-card z-depth-1-half border-0">
+                            <div class="view zoom">
+                                <img src="{{ item.image_information }}"
+                                     class="img-fluid"
+                                     alt="">
+                                <div class="stripe dark">
+                                    <a>
+                                        <p>{{ item.name }}
+                                            <i class="fas fa-angle-right"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="text-center my-5">
+        <h2 class="h1-responsive font-weight-bold text-center my-5">Próximos</h2>
+        <p class="grey-text text-center w-responsive mx-auto mb-5">Lista dos próximos itens a serem disponibilizados.</p>
+        <div class="container-fluid">
+            <div class="row">
+                {% for item in items_upcoming %}
+                    <div class="col-lg-2 col-md-4 mb-lg-0 mb-4">
+                        <div class="card collection-card z-depth-1-half border-0">
+                            <div class="view zoom">
+                                <img src="{{ item.image_information }}"
+                                     class="img-fluid"
+                                     alt="">
+                                <div class="stripe dark">
+                                    <a>
+                                        <p>{{ item.name }}
+                                            <i class="fas fa-angle-right"></i>
+                                        </p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

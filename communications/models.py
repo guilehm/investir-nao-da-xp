@@ -13,7 +13,10 @@ URLS = {
     'profile_data': 'https://api.fortnitetracker.com/v1/profile/{platform}/{username}',
     'match_history': 'https://api.fortnitetracker.com/v1/profile/account/{account_id}/matches',
     'stats_by_season': 'https://fortnite-public-api.theapinetwork.com/prod09/users/public/br_stats?'
-                       'user_id={user_uid}&platform={platform}&window={window}'
+                       'user_id={user_uid}&platform={platform}&window={window}',
+    'all_items': 'https://fortnite-public-api.theapinetwork.com/prod09/items/list',
+    'upcoming_items': 'https://fortnite-public-api.theapinetwork.com/prod09/upcoming/get',
+    'daily_store': 'https://fortnite-public-api.theapinetwork.com/prod09/store/get',
 }
 
 
@@ -39,6 +42,16 @@ class Communication(models.Model):
 
     def __str__(self):
         return f'Communication #{self.id}'
+
+    def communicate_get_items(self):
+        url = URLS.get(self.method)
+        response = requests.get(url)
+        self.data = response.json()
+        self.url = url
+        if response.ok:
+            self.error = False
+        self.save()
+        return self
 
     def communicate_gaming_sdk(self, user_uid, platform, window):
         platforms = {

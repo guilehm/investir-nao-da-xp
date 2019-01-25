@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Platform, Season
+from core.models import Item, Platform, Season
 
 
 @admin.register(Platform)
@@ -15,3 +15,10 @@ class SeasonAdmin(admin.ModelAdmin):
     list_display = ('name', 'date_added')
     list_filter = ('date_added', 'date_changed')
     search_fields = ('name',)
+
+
+@admin.register(Item)
+class ItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'type', 'rarity', 'obtained')
+    list_filter = ('captial', 'type', 'rarity', 'is_upcoming', 'obtained_type')
+    search_fields = ('name', 'identifier')
