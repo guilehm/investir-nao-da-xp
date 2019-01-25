@@ -1,10 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 
 import time
-
 import requests
 from celery import shared_task
-from communications.utils import get_profile_data
+from communications.utils import get_profile_data, get_all_items
 from players.models import Friend
 from core.models import Item
 
@@ -52,3 +51,11 @@ def create_item(data):
     for key, value in formatted_data.items():
         setattr(item, key, value)
     item.save()
+
+
+@shared_task
+def get_items():
+    communication = get_all_items()
+    if not communication.error:
+        for item in communication.data:
+            create_item.delay(item)
