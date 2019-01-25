@@ -4,9 +4,9 @@ import time
 
 import requests
 from celery import shared_task
-
 from communications.utils import get_profile_data
 from players.models import Friend
+from core.models import Item
 
 
 @shared_task
@@ -26,3 +26,29 @@ def get_friends_status():
 def assure_user_id_at_api_database(username):
     url = f'https://fortnite-public-api.theapinetwork.com/prod09/users/id?username={username}'
     requests.get(url)
+
+
+def extract_item_data(data):
+    formatted_data = {
+        'name': data.get('name'),
+        'description': data.get('description'),
+        'upcoming': data.get('upcoming'),
+        'cost': data.get('cost'),
+        'type': data.get('type'),
+        'rarity': data.get('rarity'),
+        'image_transparent': data['images'].get('transparent'),
+        'image_background': data['images'].get('background'),
+        'image_information': data['images'].get('info'),
+        'ratings': data.get('ratings'),
+        'last_update': data.get('lastupdate'),
+    }
+    return formatted_data
+
+
+@shared_task
+def create_item(data):
+    item, _ = Item.objects.get_or_create(identifier=data.get('identifier'))
+    formatted_data = extract_item_data(data)
+    for key, value in formatted_data.items():
+        setattr(item, key, value)
+    item.save()
