@@ -5,7 +5,7 @@ from django.views.decorators.cache import cache_page
 from communications.utils import get_profile_data, get_stats_by_season
 from core.forms import SearchForm
 from core.models import Platform, Season, Item
-from core.tasks import get_friends_status, get_items
+from core.tasks import get_friends_status, get_items, get_upcoming_items_task
 from players.models import Friend, Player
 from itertools import islice
 
@@ -15,6 +15,7 @@ def index(request):
     friends = Friend.objects.all()
     platforms = Platform.objects.all()
     get_friends_status.delay()
+    get_upcoming_items_task.delay()
     get_items.delay()
     return render(request, 'core/index.html', {
         'friends': friends,
@@ -86,6 +87,8 @@ def player_detail_by_season(request, username, season_number):
 @cache_page(0.5 * 60)
 def item_list(request):
     items = islice(Item.objects.order_by('?'), 4)
+    items_upcoming = Item.objects.filter(is_upcoming=True)
     return render(request, 'core/items_all_list.html', {
         'items': items,
+        'items_upcoming': items_upcoming,
     })
