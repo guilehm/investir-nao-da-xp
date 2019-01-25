@@ -1,11 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 
 import time
+
 import requests
 from celery import shared_task
-from communications.utils import get_profile_data, get_all_items, get_upcoming_items
-from players.models import Friend
+
+from communications.utils import get_all_items, get_profile_data, get_upcoming_items
 from core.models import Item
+from players.models import Friend
 
 
 @shared_task

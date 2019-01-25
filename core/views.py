@@ -1,13 +1,14 @@
+from itertools import islice
+
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
 from communications.utils import get_profile_data, get_stats_by_season
 from core.forms import SearchForm
-from core.models import Platform, Season, Item
+from core.models import Item, Platform, Season
 from core.tasks import get_friends_status, get_items, get_upcoming_items_task
 from players.models import Friend, Player
-from itertools import islice
 
 
 @cache_page(1 * 60)
