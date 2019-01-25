@@ -55,6 +55,7 @@ class Item(models.Model):
     refundable = models.SmallIntegerField(null=True, blank=True)
     ratings = JSONField(null=True, blank=True)
     last_update = models.CharField(max_length=50, null=True, blank=True)
+    is_upcoming = models.BooleanField(default=False)
 
     youtube = models.URLField(null=True, blank=True)
     image = models.URLField(null=True, blank=True)
