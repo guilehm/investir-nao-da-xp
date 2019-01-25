@@ -35,15 +35,21 @@ def extract_item_data(data):
         'cost': data.get('cost'),
         'type': data.get('type'),
         'rarity': data.get('rarity'),
-        'image': data.get('image'),
         'captial': data.get('captial'),
         'obtained_type': data.get('obtained_type'),
         'featured': data.get('featured'),
         'refundable': data.get('refundable'),
         'youtube': data.get('youtube'),
-        'image_transparent': data['images'].get('transparent'),
-        'image_background': data['images'].get('background'),
-        'image_information': data['images'].get('info'),
+        'image': data['image'] if data.get('image') else data['item'].get('image'),
+        'image_transparent': data['images'].get(
+            'transparent'
+        ) if data.get('images') else data['item']['images']['transparent'],
+        'image_background': data['images'].get(
+            'background'
+        ) if data.get('images') else data['item']['images']['background'],
+        'image_information': data['images'].get(
+            'info'
+        ) if data.get('images') else data['item']['images']['information'],
         'ratings': data.get('ratings'),
         'last_update': data.get('lastupdate'),
     }
