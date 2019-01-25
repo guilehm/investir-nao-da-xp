@@ -60,7 +60,6 @@ def extract_item_data(data):
     return formatted_data
 
 
-@shared_task
 def create_item(data, is_upcoming=False):
     identifier = data['identifier'] if data.get('identifier') else data['itemid']
     item, _ = Item.objects.get_or_create(identifier=identifier)
@@ -78,7 +77,7 @@ def get_items():
     communication = get_all_items()
     if not communication.error:
         for item in communication.data:
-            create_item.delay(item)
+            create_item(item)
 
 
 @shared_task
@@ -88,4 +87,4 @@ def get_upcoming_items_task():
     if not communication.error:
         Item.objects.update(is_upcoming=False)
         for item in communication.data['items']:
-            create_item.delay(data=item, is_upcoming=True)
+            create_item(data=item, is_upcoming=True)
