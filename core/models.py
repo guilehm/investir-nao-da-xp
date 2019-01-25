@@ -41,7 +41,7 @@ class Season(models.Model):
 
 
 class Item(models.Model):
-    item_id = models.CharField(max_length=100)
+    identifier = models.CharField(max_length=100, unique=True, null=True, blank=True)
     name = models.CharField(max_length=50, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
     upcoming = models.SmallIntegerField(null=True, blank=True)
