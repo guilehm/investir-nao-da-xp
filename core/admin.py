@@ -20,5 +20,5 @@ class SeasonAdmin(admin.ModelAdmin):
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('name', 'type', 'rarity', 'obtained')
-    list_filter = ('captial', 'type', 'rarity', 'obtained')
-    search_fields = ('name', 'item_id')
+    list_filter = ('captial', 'type', 'rarity', 'is_upcoming', 'obtained_type')
+    search_fields = ('name', 'identifier')
