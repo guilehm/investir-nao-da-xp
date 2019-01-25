@@ -2,11 +2,12 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 
-from communications.utils import get_profile_data, get_stats_by_season, get_all_items
+from communications.utils import get_profile_data, get_stats_by_season
 from core.forms import SearchForm
-from core.models import Platform, Season
-from core.tasks import get_friends_status, create_item
+from core.models import Platform, Season, Item
+from core.tasks import get_friends_status, get_items
 from players.models import Friend, Player
+from itertools import islice
 
 
 @cache_page(1 * 60)
@@ -14,6 +15,7 @@ def index(request):
     friends = Friend.objects.all()
     platforms = Platform.objects.all()
     get_friends_status.delay()
+    get_items.delay()
     return render(request, 'core/index.html', {
         'friends': friends,
         'platforms': platforms,
@@ -81,10 +83,9 @@ def player_detail_by_season(request, username, season_number):
     })
 
 
-@cache_page(20 * 60)
+@cache_page(0.5 * 60)
 def item_list(request):
-    communication = get_all_items()
-    if not communication.error:
-        for item in communication.data:
-            create_item.delay(item)
-    return render(request, 'core/items_all_list.html')
+    items = islice(Item.objects.order_by('?'), 4)
+    return render(request, 'core/items_all_list.html', {
+        'items': items,
+    })
