@@ -60,3 +60,11 @@ def get_stats_by_season(user_id, user_clean_uid, platform_name, season):
             )
             cache.set(cache_name, communication.id)
     return communication
+
+
+def get_all_items():
+    communication = Communication.objects.create(
+        method='all_items'
+    )
+    communication = communication.communicate_get_items()
+    return communication
