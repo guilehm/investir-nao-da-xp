@@ -51,9 +51,12 @@ class Item(models.Model):
     rarity = models.CharField(max_length=50, null=True, blank=True)
     obtained = models.CharField(max_length=50, null=True, blank=True)
     obtained_type = models.CharField(max_length=50, null=True, blank=True)
+    featured = models.SmallIntegerField(null=True, blank=True)
+    refundable = models.SmallIntegerField(null=True, blank=True)
     ratings = JSONField(null=True, blank=True)
     last_update = models.CharField(max_length=50, null=True, blank=True)
 
+    youtube = models.URLField(null=True, blank=True)
     image = models.URLField(null=True, blank=True)
     image_transparent = models.URLField(null=True, blank=True)
     image_background = models.URLField(null=True, blank=True)
