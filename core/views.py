@@ -63,6 +63,7 @@ def player_detail(request, username):
         'player': player,
         'status': status,  # FIXME: Refactor
         'seasons': seasons,
+        'season_name': window_name,
     })
 
 
@@ -76,12 +77,14 @@ def player_detail_by_season(request, username, season_number):
     except ValueError:
         return redirect('core:player-detail', username=username)
     window, _ = Season.objects.get_or_create(name=season_name)
-    stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)
+    comm = get_stats_by_season(player.id, player.clean_uid, platform_name, window)
+    stats = comm.player_stats if comm else None
     seasons = Season.objects.only_available()
     return render(request, 'core/player_detail_by_season.html', {
         'player': player,
-        'status': stats,  # FIXME: Refactor
-        'seasons': seasons
+        'stats': stats,  # FIXME: Refactor
+        'seasons': seasons,
+        'season_name': season_name,
     })
 
 
