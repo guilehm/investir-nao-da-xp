@@ -96,3 +96,31 @@ def item_list(request):
         'items': items,
         'items_upcoming': items_upcoming,
     })
+
+
+@cache_page(5 * 60)
+def chart_list(request):
+    season_name = request.GET.get('season', 'alltime')
+    modes = ['solo', 'duo', 'squad']
+    mode = request.GET.get('mode', 'squad').lower()
+    if mode not in modes:
+        mode = 'squad'
+    try:
+        season = Season.objects.get(name=season_name)
+    except Season.DoesNotExist:
+        season, _ = Season.objects.get_or_create(name='alltime')
+    friends = Player.objects.filter(friends__isnull=False)
+    all_stats = list()
+    for friend in friends:
+        comm = get_stats_by_season(
+            friend.id, friend.clean_uid, friend.last_platform_name, season
+        )
+        all_stats.append(comm.player_stats if comm else None)
+    seasons = Season.objects.only_available()
+    return render(request, 'core/chart_list.html', {
+        'season_name': season.name,
+        'all_stats': all_stats,
+        'mode': mode,
+        'seasons': seasons,
+    })
+
