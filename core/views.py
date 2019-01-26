@@ -48,7 +48,7 @@ def player_detail(request, username):
     platform = request.GET.get('platform')
     platforms = [platform.name for platform in player.platforms.all()]
     if platform not in platforms:
-        platform = player.last_platform_name()
+        platform = player.last_platform_name
     window_name = request.GET.get('window') or 'alltime'
     try:
         window = Season.objects.get(name=window_name)
@@ -69,7 +69,7 @@ def player_detail(request, username):
 
 def player_detail_by_season(request, username, season_number):
     player = get_object_or_404(Player, username=username)
-    platform_name = player.last_platform_name()
+    platform_name = player.last_platform_name
     try:
         if season_number == 0:
             raise ValueError
