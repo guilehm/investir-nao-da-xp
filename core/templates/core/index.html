@@ -7,8 +7,16 @@
 {% endblock %}
 {% block content %}
     {% if friends %}
-        <div id="friends-charts" class="container">
-            <canvas id="squadKillsChart"></canvas>
+        <div id="friends-charts" class="container mb-5">
+            <h1 class="text-center mb-4">Gráficos Squad</h1>
+            <div class="row">
+                <div class="col-lg-6">
+                    <canvas id="squadKillsChart" height="200px"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="kdChart" height="200px"></canvas>
+                </div>
+            </div>
         </div>
         <div id="friends" class="container">
             <h1 class="text-center mb-4">Amigos</h1>
@@ -118,7 +126,7 @@
                         {% endfor %}
                     ],
                     datasets: [{
-                        label: "Squad Kills",
+                        label: "Kills",
                         "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
                         "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
                         data: [
