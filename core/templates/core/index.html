@@ -8,7 +8,7 @@
 {% block content %}
     {% if friends %}
         <div id="friends-charts" class="container">
-            <canvas id="kdChart"></canvas>
+            <canvas id="squadKillsChart"></canvas>
         </div>
         <div id="friends" class="container">
             <h1 class="text-center mb-4">Amigos</h1>
@@ -108,7 +108,7 @@
 
     {% block js %}
         <script>
-            var ctx = document.getElementById('kdChart').getContext('2d');
+            var ctx = document.getElementById('squadKillsChart').getContext('2d');
             var chart = new Chart(ctx, {
                 type: 'bar',
                 data: {
