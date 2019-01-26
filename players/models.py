@@ -32,6 +32,7 @@ class Player(models.Model):
     def last_platform(self):
         return self.statuses.last().platform
 
+    @property
     def last_platform_name(self):
         return self.last_platform().name
 

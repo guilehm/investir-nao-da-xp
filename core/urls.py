@@ -14,4 +14,5 @@ urlpatterns = [
         name='player-detail-by-season',
     ),
     path('item/list/', views.item_list, name='item-list'),
+    path('chart/list/', views.chart_list, name='chart-list'),
 ]

@@ -48,7 +48,7 @@ def player_detail(request, username):
     platform = request.GET.get('platform')
     platforms = [platform.name for platform in player.platforms.all()]
     if platform not in platforms:
-        platform = player.last_platform_name()
+        platform = player.last_platform_name
     window_name = request.GET.get('window') or 'alltime'
     try:
         window = Season.objects.get(name=window_name)
@@ -63,12 +63,13 @@ def player_detail(request, username):
         'player': player,
         'status': status,  # FIXME: Refactor
         'seasons': seasons,
+        'season_name': window_name,
     })
 
 
 def player_detail_by_season(request, username, season_number):
     player = get_object_or_404(Player, username=username)
-    platform_name = player.last_platform_name()
+    platform_name = player.last_platform_name
     try:
         if season_number == 0:
             raise ValueError
@@ -76,12 +77,14 @@ def player_detail_by_season(request, username, season_number):
     except ValueError:
         return redirect('core:player-detail', username=username)
     window, _ = Season.objects.get_or_create(name=season_name)
-    stats = get_stats_by_season(player.id, player.clean_uid, platform_name, window)
+    comm = get_stats_by_season(player.id, player.clean_uid, platform_name, window)
+    stats = comm.player_stats if comm else None
     seasons = Season.objects.only_available()
     return render(request, 'core/player_detail_by_season.html', {
         'player': player,
-        'status': stats,  # FIXME: Refactor
-        'seasons': seasons
+        'stats': stats,  # FIXME: Refactor
+        'seasons': seasons,
+        'season_name': season_name,
     })
 
 
@@ -93,3 +96,31 @@ def item_list(request):
         'items': items,
         'items_upcoming': items_upcoming,
     })
+
+
+@cache_page(5 * 60)
+def chart_list(request):
+    season_name = request.GET.get('season', 'alltime')
+    modes = ['solo', 'duo', 'squad']
+    mode = request.GET.get('mode', 'squad').lower()
+    if mode not in modes:
+        mode = 'squad'
+    try:
+        season = Season.objects.get(name=season_name)
+    except Season.DoesNotExist:
+        season, _ = Season.objects.get_or_create(name='alltime')
+    friends = Player.objects.filter(friends__isnull=False)
+    all_stats = list()
+    for friend in friends:
+        comm = get_stats_by_season(
+            friend.id, friend.clean_uid, friend.last_platform_name, season
+        )
+        all_stats.append(comm.player_stats if comm else None)
+    seasons = Season.objects.only_available()
+    return render(request, 'core/chart_list.html', {
+        'season_name': season.name,
+        'all_stats': all_stats,
+        'mode': mode,
+        'seasons': seasons,
+    })
+

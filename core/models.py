@@ -6,6 +6,9 @@ class SeasonManager(models.QuerySet):
     def only_available(self):
         return self.filter(statuses__isnull=False).distinct()
 
+    def last_season(self):
+        return self.only_available().last()
+
 
 class Platform(models.Model):
     epic_id = models.CharField(max_length=100, null=True, blank=True)
@@ -21,7 +24,7 @@ class Platform(models.Model):
 
 class Season(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    number = models.SmallIntegerField(null=True, blank=True)
+    number = models.SmallIntegerField(null=True, blank=True, db_index=True)
 
     date_added = models.DateTimeField(auto_now_add=True)
     date_changed = models.DateTimeField(auto_now=True)
@@ -37,7 +40,7 @@ class Season(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        ordering = ('-name',)
+        ordering = ('number',)
 
 
 class Item(models.Model):
