@@ -98,7 +98,7 @@ def item_list(request):
     })
 
 
-@cache_page(5 * 60)
+@cache_page(3 * 60)
 def chart_list(request):
     season_name = request.GET.get('season', 'alltime')
     modes = ['solo', 'duo', 'squad']
