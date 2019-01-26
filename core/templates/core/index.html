@@ -17,6 +17,14 @@
                     <canvas id="kdChart" height="200px"></canvas>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <canvas id="winsSquad" height="200px"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="winRatioSquad" height="200px"></canvas>
+                </div>
+            </div>
         </div>
         <div id="friends" class="container">
             <h1 class="text-center mb-4">Amigos</h1>
@@ -161,6 +169,64 @@
                         data: [
                             {% for friend in friends %}
                                 {{ friend.player.status.stats_squad.kd.value  }},
+                            {% endfor %}
+                        ],
+                    }]
+                },
+                options: {
+                    'tooltips': {
+                        'enabled': true,
+                        'titleFontSize': 16
+                    }
+                }
+            });
+        </script>
+        <script>
+            var ctx = document.getElementById('winsSquad').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        {% for friend in friends %}
+                            "{{ friend.player.username }}",
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: "Vitórias ",
+                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                        data: [
+                            {% for friend in friends %}
+                                {{ friend.player.status.stats_squad.top1.value  }},
+                            {% endfor %}
+                        ],
+                    }]
+                },
+                options: {
+                    'tooltips': {
+                        'enabled': true,
+                        'titleFontSize': 16
+                    }
+                }
+            });
+        </script>
+        <script>
+            var ctx = document.getElementById('winRatioSquad').getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        {% for friend in friends %}
+                            "{{ friend.player.username }}",
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: "% Vitórias ",
+                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                        data: [
+                            {% for friend in friends %}
+                                {{ friend.player.status.stats_squad.winRatio.value  }},
                             {% endfor %}
                         ],
                     }]
