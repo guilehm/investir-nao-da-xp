@@ -2,8 +2,14 @@
 {% load static %}
 {% load i18n %}
 {% language 'pt-BR' %}
+{% block header_imports %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{% endblock %}
 {% block content %}
     {% if friends %}
+        <div id="friends-charts" class="container">
+            <canvas id="kdChart"></canvas>
+        </div>
         <div id="friends" class="container">
             <h1 class="text-center mb-4">Amigos</h1>
             {% for friend in friends %}
