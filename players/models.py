@@ -5,6 +5,7 @@ import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.functional import cached_property
+
 from core.models import Season
 
 logger = logging.getLogger(__name__)
