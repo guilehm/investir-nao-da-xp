@@ -15,7 +15,7 @@ class PlayerAdmin(admin.ModelAdmin):
 class PlayerStatsAdmin(admin.ModelAdmin):
     list_display = ('id', 'player', 'window', 'source', 'date_added')
     list_filter = ('player', 'date_added')
-    search_fields = ('player__username', 'data')
+    search_fields = ('player__username', 'data', 'id')
     readonly_fields = ('date_added', 'date_changed')
 
 
