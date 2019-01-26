@@ -25,6 +25,7 @@ celery = "*"
 whitenoise = "*"
 django-storages = "*"
 boto3 = "*"
+discord = "*"
 
 [requires]
 python_version = "3.6"
