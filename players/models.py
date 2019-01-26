@@ -4,7 +4,7 @@ import uuid
 import requests
 from django.contrib.postgres.fields import JSONField
 from django.db import models
-
+from django.utils.functional import cached_property
 from core.models import Season
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,7 @@ class Player(models.Model):
     def last_platform_name(self):
         return self.last_platform().name
 
+    @cached_property
     def status(self):
         return self.statuses.filter(source='fortnite_tracker').last()
 
