@@ -1,7 +1,6 @@
 from django import template
 
 from core.forms import SearchForm
-from core.models import Season
 
 register = template.Library()
 
