@@ -43,9 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'debug_toolbar',
+    'chatterbot.ext.django_chatterbot',
     'communications',
     'players',
     'core',
+    'bot',
     'xp',
 ]
 
@@ -141,6 +143,13 @@ DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 
 TRN_API_KEY = os.getenv('TRN_API_KEY')
+DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
+
+CHATTERBOT = {
+    'name': 'ParçaBot',
+    'storage_adapter': 'chatterbot.storage.DjangoStorageAdapter',
+}
 
 LOGGING = {
     'version': 1,
