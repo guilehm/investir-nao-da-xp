@@ -25,7 +25,8 @@ celery = "*"
 whitenoise = "*"
 django-storages = "*"
 boto3 = "*"
-discord = "*"
+"discord.py" = {git = "https://github.com/Rapptz/discord.py.git"}
+chatterbot = "*"
 
 [requires]
 python_version = "3.6"
