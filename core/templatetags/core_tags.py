@@ -1,7 +1,6 @@
 from django import template
 
 from core.forms import SearchForm
-from core.models import Season
 
 register = template.Library()
 
@@ -23,5 +22,4 @@ def stat_filter(request, stats, data):
     all_stats_data = list()
     for stat in stats:
         all_stats_data.append(getattr(stat, f'stats_{mode}')[f'{data}_{mode}'])
-    print(all_stats_data)
     return all_stats_data

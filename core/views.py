@@ -123,4 +123,3 @@ def chart_list(request):
         'mode': mode,
         'seasons': seasons,
     })
-
