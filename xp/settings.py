@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'communications',
     'players',
     'core',
-    'bot',
     'xp',
 ]
 
