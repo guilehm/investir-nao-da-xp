@@ -1,0 +1,23 @@
+[
+{
+   "model": "core.platform",
+   "pk": 1,
+   "fields": {
+      "name": "pc"
+   }
+},
+{
+   "model": "core.platform",
+   "pk": 2,
+   "fields": {
+      "name": "psn"
+   }
+},
+{
+   "model": "core.platform",
+   "pk": 3,
+   "fields": {
+      "name": "xbox"
+   }
+}
+]
