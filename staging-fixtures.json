@@ -3,21 +3,27 @@
    "model": "core.platform",
    "pk": 1,
    "fields": {
-      "name": "pc"
+      "name": "pc",
+      "date_added": "2019-02-02",
+      "date_changed": "2019-02-02"
    }
 },
 {
    "model": "core.platform",
    "pk": 2,
    "fields": {
-      "name": "psn"
+      "name": "psn",
+      "date_added": "2019-02-02",
+      "date_changed": "2019-02-02"
    }
 },
 {
    "model": "core.platform",
    "pk": 3,
    "fields": {
-      "name": "xbox"
+      "name": "xbox",
+      "date_added": "2019-02-02",
+      "date_changed": "2019-02-02"
    }
 }
 ]
