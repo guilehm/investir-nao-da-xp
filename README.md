@@ -4,22 +4,21 @@
 **Track your Fortnite stats, compare with your friends and see the charts**
 
 
-Live preview
---------------
+# Live Preview
 https://investir-xp.herokuapp.com/
 
 
-Overview
---------
+# Overview
 
 * Celery
 * RabbitMQ
+* Redis
 * Whitenoise
 * PostgreSQL
+* Heroku
 
 
-Features
---------
+# Features
 * Track your stats by searching for the username at the main form
 * All requests are stored in the database as a `Communication` instance
 * You can see at Django Admin all the requests history and contents
@@ -28,28 +27,39 @@ Features
 * The project is ready to deploy at Heroku with WhiteNoise
 
 
-Installation
-------------
+# Installation
 
+Postgres
+--------
 
-Create a Postgres Database (you may have PostgreSQL installed on your computer)
+Install Postgres (if you already have Postgres, go to next step)
+
+    $ sudo su -
+    $ apt-get install postgresql postgresql-contrib
+    $ update-rc.d postgresql enable
+    $ service postgresql start
+    
+
+Create a Postgres Database
 
     $ sudo su postgres
     $ psql
     $ create database investir;
     
+
+Redis
+-----
+Install Redis: [tutorial](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04)
+
+
+
+Environment
+--------
+
+Install pipenv
+
+    $ pip3 install pipenv
     
-Clone this repository
-
-
-    $ git clone https://github.com/Guilehm/investir-nao-da-xp.git
-    
-
-Enter project directory
-
-    $ cd investir-nao-da-xp
-
-
 Create virtual environment and install dependencies
 
     $ pipenv install
@@ -69,6 +79,27 @@ Automatically export all variables
     $ set -a
     $ source .env
     $ set +a
+
+RabbitMQ
+--------
+
+    $ sudo apt-get install -y erlang
+    $ sudo apt-get install rabbitmq-server
+
+
+Project
+-------
+    
+Clone this repository
+
+
+    $ git clone https://github.com/Guilehm/investir-nao-da-xp.git
+    
+
+Enter project directory
+
+    $ cd investir-nao-da-xp
+    
 
 Migrate the database
 
