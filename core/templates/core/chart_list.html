@@ -56,131 +56,131 @@
 
     {% block js %}
         {% localize off %}
-        <script>
-            var ctx = document.getElementById('squadKillsChart').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        {% for stats in all_stats %}
-                            "{{ stats.player.username }}",
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: "Kills",
-                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
-                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
-                        data: {% stat_filter request all_stats 'kills' %},
-                    }]
-                },
-                options: {
-                    'tooltips': {
-                        'enabled': true,
-                        'titleFontSize': 16
+            <script>
+                var ctx = document.getElementById('squadKillsChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for stats in all_stats %}
+                                "{{ stats.player.username }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: "Kills",
+                            "backgroundColor": ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e", "#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                            "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                            data: {% stat_filter request all_stats 'kills' %},
+                        }]
+                    },
+                    options: {
+                        'tooltips': {
+                            'enabled': true,
+                            'titleFontSize': 16
+                        }
                     }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('kdChart').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        {% for stats in all_stats %}
-                            "{{ stats.player.username }}",
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: "KD ",
-                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
-                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
-                        data: {% stat_filter request all_stats 'kd' %},
-                    }]
-                },
-                options: {
-                    'tooltips': {
-                        'enabled': true,
-                        'titleFontSize': 16
+                });
+            </script>
+            <script>
+                var ctx = document.getElementById('kdChart').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for stats in all_stats %}
+                                "{{ stats.player.username }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: "KD ",
+                            "backgroundColor": ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e", "#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                            "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                            data: {% stat_filter request all_stats 'kd' %},
+                        }]
+                    },
+                    options: {
+                        'tooltips': {
+                            'enabled': true,
+                            'titleFontSize': 16
+                        }
                     }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('winsSquad').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        {% for stats in all_stats %}
-                            "{{ stats.player.username }}",
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: "Vitórias ",
-                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
-                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
-                        data: {% stat_filter request all_stats 'placetop1' %},
-                    }]
-                },
-                options: {
-                    'tooltips': {
-                        'enabled': true,
-                        'titleFontSize': 16
+                });
+            </script>
+            <script>
+                var ctx = document.getElementById('winsSquad').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for stats in all_stats %}
+                                "{{ stats.player.username }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: "Vitórias ",
+                            "backgroundColor": ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e", "#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                            "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                            data: {% stat_filter request all_stats 'placetop1' %},
+                        }]
+                    },
+                    options: {
+                        'tooltips': {
+                            'enabled': true,
+                            'titleFontSize': 16
+                        }
                     }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('winRatioSquad').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        {% for stats in all_stats %}
-                            "{{ stats.player.username }}",
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: "% Vitórias ",
-                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
-                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
-                        data: {% stat_filter request all_stats 'winrate' %},
-                    }]
-                },
-                options: {
-                    'tooltips': {
-                        'enabled': true,
-                        'titleFontSize': 16
+                });
+            </script>
+            <script>
+                var ctx = document.getElementById('winRatioSquad').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for stats in all_stats %}
+                                "{{ stats.player.username }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: "% Vitórias ",
+                            "backgroundColor": ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e", "#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                            "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                            data: {% stat_filter request all_stats 'winrate' %},
+                        }]
+                    },
+                    options: {
+                        'tooltips': {
+                            'enabled': true,
+                            'titleFontSize': 16
+                        }
                     }
-                }
-            });
-        </script>
-        <script>
-            var ctx = document.getElementById('matchesPlayed').getContext('2d');
-            var chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        {% for stats in all_stats %}
-                            "{{ stats.player.username }}",
-                        {% endfor %}
-                    ],
-                    datasets: [{
-                        label: "Partidas ",
-                        "backgroundColor": ["rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
-                        "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
-                        data: {% stat_filter request all_stats 'matchesplayed' %},
-                    }]
-                },
-                options: {
-                    'tooltips': {
-                        'enabled': true,
-                        'titleFontSize': 16
+                });
+            </script>
+            <script>
+                var ctx = document.getElementById('matchesPlayed').getContext('2d');
+                var chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            {% for stats in all_stats %}
+                                "{{ stats.player.username }}",
+                            {% endfor %}
+                        ],
+                        datasets: [{
+                            label: "Partidas ",
+                            "backgroundColor": ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e", "#3e95cd", "#8e5ea2", "#3cba9f","#e8c3b9","#c45850","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)", "rgba(255, 99, 132, 0.2)",],
+                            "borderColor": ["rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)","rgb(255, 99, 132)",],
+                            data: {% stat_filter request all_stats 'matchesplayed' %},
+                        }]
+                    },
+                    options: {
+                        'tooltips': {
+                            'enabled': true,
+                            'titleFontSize': 16
+                        }
                     }
-                }
-            });
-        </script>
-    {% endlocalize %}
+                });
+            </script>
+        {% endlocalize %}
     {% endblock %}
 {% endblock %}
