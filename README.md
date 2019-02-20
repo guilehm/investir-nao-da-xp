@@ -13,7 +13,6 @@ https://investir-xp.herokuapp.com/
 * Celery
 * RabbitMQ
 * Redis
-* Whitenoise
 * PostgreSQL
 * Heroku
 
@@ -24,7 +23,7 @@ https://investir-xp.herokuapp.com/
 * You can see at Django Admin all the requests history and contents
 * When a user is searched, instances of Player and PlayerStatus are created
 * All requests are made asynchronously for a better performance
-* The project is ready to deploy at Heroku with WhiteNoise
+* The project is ready to deploy at Heroku
 
 
 # Installation
