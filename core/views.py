@@ -11,7 +11,6 @@ from core.tasks import get_friends_status, get_items, get_upcoming_items_task
 from players.models import Friend, Player
 
 
-@cache_page(0.5 * 60)
 def index(request):
     friends = Friend.objects.all()
     platforms = Platform.objects.all()
